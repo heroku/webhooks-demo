@@ -1,3 +1,12 @@
 {
-  "repository": "https://github.com/heroku/webhooks-consumer-demo"
+  "repository": "https://github.com/heroku/webhooks-consumer-demo",
+  "env": {
+    "WEBHOOK_SECRET": {
+      "description": "secret used to check webhook signing",
+      "generator": "secret"
+    }
+  },
+  "scripts": {
+    "postdeploy": "bundle exec rake db:migrate"
+  }
 }
