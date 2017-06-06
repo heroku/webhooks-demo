@@ -1,5 +1,7 @@
 class WebhooksController < ApplicationController
   def create
-    logger.info(request.body.read.inspect)
+    event = request.body.read
+    logger.info(event)
+    # TODO: store event in DB events table
   end
 end
