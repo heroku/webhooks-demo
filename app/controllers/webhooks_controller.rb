@@ -1,7 +1,8 @@
 class WebhooksController < ApplicationController
   def create
-    event = request.body.read
-    logger.info(event)
-    # TODO: store event in DB events table
+    payload = MultiJson.load(request.body.read)
+    Event.create(payload: payload)
+    # TODO ensure transaction around request?
+    # TODO: trim events list?
   end
 end
