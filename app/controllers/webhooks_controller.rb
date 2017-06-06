@@ -1,7 +1,6 @@
 class WebhooksController < ApplicationController
   def create
-    payload = MultiJson.load(request.body.read)
-    Event.create(payload: payload)
+    Event.create(payload: params['webhook'])
     # TODO ensure transaction around request?
     # TODO: trim events list?
   end
