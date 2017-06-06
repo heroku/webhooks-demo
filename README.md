@@ -1,6 +1,6 @@
 # README
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/heroku/webhooks-consumer-demo)
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
