@@ -1,5 +1,6 @@
 {
   "repository": "https://github.com/heroku/webhooks-consumer-demo",
+  "addons": ["heroku-postgresql:hobby-dev"],
   "env": {
     "WEBHOOK_SECRET": {
       "description": "secret used to check webhook signing",
