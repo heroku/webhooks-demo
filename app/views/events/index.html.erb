@@ -1,1 +1,4 @@
 <h1>Listing Events</h1>
+<% @events.each do |event| %>
+  <pre><%= event.payload %><pre/>
+<%end%>
