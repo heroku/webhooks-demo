@@ -8,5 +8,5 @@ test:
 
 production:
   adapter: postgresql
-  url: <%= ENV.fetch("DATABASE_URL") %>
+  url: <%= ENV.fetch("DATABASE_URL") {} %>
   channel_prefix: webhooks-consumer-demo_production
