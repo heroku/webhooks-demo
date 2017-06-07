@@ -2,25 +2,24 @@
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/heroku/webhooks-consumer-demo)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+After deploying, create a webhook:
 
-Things you may want to cover:
+```
+git clone https://github.com/heroku/heroku-webhooks.git
+h plugins:link heroku-webhooks
+hs labs:enable webhooks-beta-user -u mhale@heroku.com
+export HEROKU_APP=mhale-wh-demo
+h webhooks:add --include api:release --url https://$HEROKU_APP.herokuapp.com/webhooks -s $(h config:get WEBHOOK_SECRET) -l sync
+```
 
-* Ruby version
+Open the app
 
-* System dependencies
+```
+h open
+```
 
-* Configuration
+Trigger an event
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
+h config:set FOO=1
+```
