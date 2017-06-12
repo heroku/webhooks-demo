@@ -6,7 +6,9 @@ class WebhooksController < ActionController::API
 
     if Rack::Utils.secure_compare(calculated_hmac, heroku_hmac)
       event = Event.create(payload: params['webhook'])
-      ActionCable.server.broadcast 'events', event.payload
+      serialized_event = ActiveModelSerializers::SerializableResource.new(event, {serializer: EventSerializer})
+      ActionCable.server.broadcast 'events', serialized_event
+
       # TODO ensure transaction around request?
       # TODO: trim events list?
     else
