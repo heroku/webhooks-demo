@@ -26,7 +26,7 @@ heroku sudo labs:enable webhooks-beta-user -u $your_email
 Then create a webhook:
 
 ```
-heroku webhooks:add --include api:release --url https://$HEROKU_APP.herokuapp.com/webhooks -s $(h config:get WEBHOOK_SECRET) -l sync -a $TRIGGER_APP
+heroku webhooks:add --include api:release --url https://$HEROKU_APP.herokuapp.com/webhooks -s "$(heroku config:get WEBHOOK_SECRET)" -l sync -a $TRIGGER_APP
 ```
 
 Open the webhooks consumer app:
