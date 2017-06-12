@@ -1,10 +1,10 @@
-<div class="container flex flex-row bg-white flex pv3">
-  <div class="header mt2 w-100 w-60-l flex h4 ph2 b--silver">
+<div class="flex flex-row bg-white flex pv3">
+  <div class="header mt2 w-100 w-60-l flex h4 ph3 b--silver">
     <h1 class="purple">Listing Events</h1>
   </div>
 </div>
 
-<div class="container flex flex-row bg-white flex pv3">
+<div class="flex flex-row bg-white flex ph3">
   <div class="events-list dt w-100 w-60-l">
 
     <div class="events-list-header dt-row hover-bg-lightest-silver">
@@ -14,14 +14,18 @@
 
     <% @events.each do |event| %>
     <div class="events-list-row dt-row hover-bg-lightest-silver">
-      <pre class="events-payload ba b--silver br2 code lh-copy w-100 w-60-l overflow-x-scroll"><%= event.payload %></pre>
+      <span class="pl2 f4">2017-06-12 15:09:49 -0500</span>
+      <pre class="events-payload ba b--silver br2 code lh-copy w-100 w-60-l overflow-x-scroll overflow-y-scroll"><%= event.payload %></pre>
     </div>
     <% end %>
 
     <!-- Example row: -->
     <div class="events-list-row dt-row hover-bg-lightest-silver">
       <span class="pl2 f4">2017-06-12 15:09:49 -0500</span>
-      <pre class="events-payload ba b--silver br2 code lh-copy w-100 w-60-l overflow-x-scroll overflow-y-scroll">{"test":"bar", "baz": "qux"}</pre>
+      <pre class="events-payload ba b--silver br2 code lh-copy w-100 w-60-l overflow-x-scroll overflow-y-scroll ph1 pv2">{"test":"bar", "baz": "qux"}</pre>
     </div>
   </div>
+</div>
+<div class="flex flex-row pv3 ph3">
+  <p>More events will appear here as they are received by the application.</p>
 </div>
