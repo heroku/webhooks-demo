@@ -32,7 +32,7 @@ heroku webhooks:add --include api:release --url https://$HEROKU_APP.herokuapp.co
 Open the webhooks consumer app:
 
 ```
-h open
+heroku open
 ```
 
 Trigger an event:
