@@ -1,22 +1,22 @@
-require 'test_helper'
+require "rails_helper"
 
-class WebhooksControllerTest < ActionDispatch::IntegrationTest
-  test "it requires a signature" do
-    post webhooks_url, as: :json, params: {}
-    assert_response :forbidden
+RSpec.describe "Webhooks", type: :request do
+  it "requires a signature" do
+    post webhooks_path, as: :json, params: {}
+    expect(response).to have_http_status(:forbidden)
   end
 
-  test "it does not accept invalid requests" do
+  it "does not accept invalid requests" do
     payload = { "foo" => "bar" }
     post webhooks_url, as: :json, params: payload, headers: signature_header(payload, "boom!")
-    assert_response :forbidden
+    expect(response).to have_http_status(:forbidden)
   end
 
-  test "can receive and store a webhook" do
+  it "can receive and store a webhook" do
     payload = { "foo" => "bar" }
     post webhooks_url, as: :json, params: payload, headers: signature_header(payload)
-    assert_response :success
-    assert_equal payload, Event.last.payload
+    expect(response).to have_http_status(:success)
+    expect(payload).to eq(Event.last.payload)
   end
 
   def signature_header(payload, secret = ENV['WEBHOOK_SECRET'])
