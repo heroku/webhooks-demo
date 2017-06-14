@@ -14,6 +14,7 @@ gem 'jquery-rails'
 gem 'active_model_serializers', '~> 0.10.6'
 
 group :development, :test do
+  gem 'dotenv-rails'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem "rspec-rails"
 end
