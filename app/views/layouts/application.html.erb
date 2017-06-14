@@ -14,6 +14,34 @@
 
   <body>
     <div class="container flex flex-column">
+      <div class="flex flex-row bg-white flex bg-gradient-secondary mb5 pa3 items-center">
+        <div class="f3-ns b white flex-auto">Webhooks Consumer</div>
+        <ul class="white list pa0 ma0">
+          <% if session[:email] %>
+            <li class="link ml3 dib v-mid b"><a href="/logout" class="link white">Logout</a></li>
+            <%= session[:email] %>
+          <% else %>
+            <li class="link ml3 dib v-mid b"><a href="/login" class="link white">Login</a></li>
+          <% end %>
+          <li class="link ml3 dib v-mid">
+            <%= image_tag(@gravatar, class: "br-100 w3 h3") %>
+          </li>
+        </ul>
+      </div>
+      <div class="flex-auto flex flex-row bg-white flex ph3">
+        <div class="events-list dt w-100 w-80-l center">
+          <div class="hk-tabs w-100 w-60-l">
+            <%
+              tabs = {'/' => 'Howto', '/dashboard' => 'Demo'}
+              tabs.each do |k, v|
+                css = request.fullpath == k ? "hk-tabs__tab--active" : "hk-tabs__tab"
+            %>
+              <%= link_to(v, k, class: css) %>
+            <% end %>
+            <div class="spacer flex-auto bb b--light-silver"></div>
+          </div>
+        </div>
+      </div>
       <%= yield %>
     </div>
   </body>
