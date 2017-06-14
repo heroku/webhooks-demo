@@ -5,11 +5,16 @@
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://www.herokucdn.com/purple3/latest/purple3.min.css">
+
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
     <%= action_cable_meta_tag %>
   </head>
 
   <body>
-    <%= yield %>
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>

@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
   def index
-    @events = Event.take(3)
+    render json: Event.take(3), each_serializer: EventSerializer
   end
 end
