@@ -1,21 +1,31 @@
-<div class="flex flex-row bg-white flex pv3">
-  <div class="header mt2 w-100 w-60-l flex h4 ph3 b--silver">
-    <h1 class="purple">Webhooks Consumer Demo: Listing Events</h1>
-  </div>
+<div class="flex flex-row bg-white flex bg-gradient-secondary mb5 pa3 items-center">
+  <div class="f3-ns b white flex-auto">Webhooks Consumer</div>
+  <ul class="white list pa0 ma0">
+    <li class="link ml3 dib v-mid b"><a href="#" class="link white">Logout</a></li>
+    <li class="link ml3 dib v-mid">
+      <img src="https://avatars3.githubusercontent.com/u/51578?v=3&s=460" alt="" class="br-100 w3 h3">
+    </li>
+  </ul>
 </div>
 
-<div class="flex flex-row bg-white flex ph3">
-  <div class="events-list dt w-100 w-60-l">
-    <div class="dt-row hover-bg-lightest-silver">
-      <div class="dtc pv3 b bb b--light-gray dark-gray f5">Published At</div>
-      <div class="dtc pv3 b bb b--light-gray dark-gray f5">Resource</div>
-      <div class="dtc pv3 b bb b--light-gray dark-gray f5">Action</div>
-      <div class="dtc pv3 b bb b--light-gray dark-gray f5">Payload</div>
+<div class="flex-auto flex flex-row bg-white flex ph3">
+  <div class="events-list dt w-100 w-80-l center">
+    <div class="dn dt-row-ns">
+      <div class="db dtc-ns pv3 pr3 pl3-ns b bb b--light-gray dark-gray f5">Published At</div>
+      <div class="db dtc-ns pv3 pr3 b bb b--light-gray dark-gray f5">Resource</div>
+      <div class="db dtc-ns pv3 pr3 b bb b--light-gray dark-gray f5">Action</div>
+      <div class="db dtc-ns pv3 pr3 b bb b--light-gray dark-gray f5">Payload</div>
     </div>
   </div>
 </div>
-<div class="flex flex-row pv3 ph3">
-  <p>More events will appear here as they are received by the application.</p>
+<div class="pv3 ph3 w-100 center">
+  <p class="w-100 w-80-l center lh-copy">
+    <span class="hk-button__spinner mh3">
+      <i class="hk-button__spinner__dot hk-button__spinner__dot--one"></i>
+      <i class="hk-button__spinner__dot hk-button__spinner__dot--two"></i>
+      <i class="hk-button__spinner__dot hk-button__spinner__dot--three"></i>
+    </span>
+    Events will appear as they are received by the application.</p>
 </div>
 
 <script>
@@ -25,25 +35,25 @@
 
       if (list.length > 0) {
         var newListRow = $('<div>');
-        newListRow.addClass('events-list-row dt-row hover-bg-lightest-silver');
+        newListRow.addClass('events-list-row dt-row-ns hover-bg-lightest-silver bb b--light-gray pv3 pv0-ns');
 
         var publishedAt = $('<div>');
-        publishedAt.addClass('dtc pv3 f4');
+        publishedAt.addClass('db dtc-ns pv1 pr3 pv3-ns pl3-ns f4');
         publishedAt.text(data.payload.published_at);
         $(newListRow).append(publishedAt);
 
         var resource = $('<div>');
-        resource.addClass('dtc pv3 f4');
+        resource.addClass('db dtc-ns pv1 pr3 pv3-ns f4');
         resource.text(data.payload.resource);
         $(newListRow).append(resource);
 
         var action = $('<div>');
-        action.addClass('dtc pv3 f4');
+        action.addClass('db dtc-ns pv1 pr3 pv3-ns f4');
         action.text(data.payload.action);
         $(newListRow).append(action);
 
         var codeBlock = $('<pre>');
-        codeBlock.addClass('events-payload dtc pv3 f4')
+        codeBlock.addClass('events-payload db dtc-ns pv1 pr3 pv3-ns f4 lh-copy')
         codeBlock.text(JSON.stringify(data.payload, null, 2));
         $(newListRow).append(codeBlock);
 
