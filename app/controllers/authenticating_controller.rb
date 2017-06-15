@@ -11,8 +11,6 @@ module AuthenticatingController
       heroku_api.app.info(app)
 
       session['email']
-    else
-      nil
     end
   end
 
