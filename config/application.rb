@@ -23,5 +23,10 @@ module WebhooksConsumerDemo
     config.api_only = true
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore
+
+    # Omniauth:
+    config.middleware.use OmniAuth::Builder do
+      provider :heroku, ENV['HEROKU_OAUTH_ID'], ENV['HEROKU_OAUTH_SECRET'], fetch_info: true
+    end
   end
 end

@@ -12,6 +12,8 @@ gem 'multi_json'
 gem 'uglifier'
 gem 'jquery-rails'
 gem 'active_model_serializers', '~> 0.10.6'
+gem 'omniauth-heroku'
+gem 'platform-api'
 
 group :development, :test do
   gem 'dotenv-rails'

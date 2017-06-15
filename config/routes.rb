@@ -6,4 +6,8 @@ Rails.application.routes.draw do
   resources :dashboard, only: [:index]
 
   root to: "dashboard#index"
+
+  get "login" => "sessions#new"
+  get "logout" => "sessions#logout"
+  get "/auth/:provider/callback" => "sessions#create"
 end

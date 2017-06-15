@@ -14,6 +14,20 @@
 
   <body>
     <div class="container flex flex-column">
+      <div class="flex flex-row bg-white flex bg-gradient-secondary mb5 pa3 items-center">
+        <div class="f3-ns b white flex-auto">Webhooks Consumer</div>
+        <ul class="white list pa0 ma0">
+          <% if session[:email] %>
+            <li class="link ml3 dib v-mid b"><a href="/logout" class="link white">Logout</a></li>
+            <%= session[:email] %>
+          <% else %>
+            <li class="link ml3 dib v-mid b"><a href="/login" class="link white">Login</a></li>
+          <% end %>
+          <li class="link ml3 dib v-mid">
+            <%= image_tag(@gravatar, class: "br-100 w3 h3") %>
+          </li>
+        </ul>
+      </div>
       <%= yield %>
     </div>
   </body>
