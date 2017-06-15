@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :events, only: [:index]
   resources :dashboard, only: [:index]
 
-  root to: "welcome#index"
+  root to: "dashboard#index"
 
   get "login" => "sessions#new"
   get "logout" => "sessions#logout"
