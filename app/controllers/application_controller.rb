@@ -1,11 +1,11 @@
 require 'digest/md5'
 
 class ApplicationController < ActionController::Base
-  before_action :load_gravatar
+  before_action :set_gravatar
 
   private
 
-  def load_gravatar
+  def set_gravatar
     if session[:email]
       hash = Digest::MD5.hexdigest(session[:email].downcase)
       @gravatar = "https://www.gravatar.com/avatar/#{hash}?d=https://www.herokucdn.com/images/ninja-avatar-96x96.png"
