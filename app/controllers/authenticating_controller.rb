@@ -4,11 +4,13 @@ module AuthenticatingController
   def authenticate_user!
     session = cookies.encrypted['_session_id']
     if session['token'] && session['email']
-      host = request.env['HTTP_HOST']
-      app = host.match(/(.*)\.herokuapp\.com$/)[1]
+      unless Rails.env.development?
+        host = request.env['HTTP_HOST']
+        app = host.match(/(.*)\.herokuapp\.com$/)[1]
 
-      heroku_api = PlatformAPI.connect_oauth(session['token'])
-      heroku_api.app.info(app)
+        heroku_api = PlatformAPI.connect_oauth(session['token'])
+        heroku_api.app.info(app)
+      end
 
       session['email']
     end
