@@ -19,6 +19,8 @@ module AuthenticatingController
       authenticate_user!
     rescue Excon::Error::Forbidden
       false
+    rescue Excon::Error::Unauthorized
+      false
     rescue Excon::Error::NotFound
       false
     end
@@ -31,6 +33,11 @@ module AuthenticatingController
           format.html { redirect_to login_path }
           format.json { render json: {'error' => 'not_logged_in'}, status: :forbidden}
         end
+      end
+    rescue Excon::Error::Unauthorized
+      respond_to do |format|
+        format.html { redirect_to login_path }
+        format.json { render json: {'error' => 'unauthorized'}, status: :forbidden}
       end
     rescue Excon::Error::Forbidden
       respond_to do |format|
