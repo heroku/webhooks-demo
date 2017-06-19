@@ -4,39 +4,50 @@
 
 ## Guide
 
-First, deploy this button and set its name as an export for later reference:
+First, deploy this button and replace `$CONSUMER_APP` in the directions with the app that was created.
+
+### Create an OAuth Client
 
 ```
-export HEROKU_APP=wh-demo-consumer
+$ heroku clients:create $CONSUMER_APP https://$CONSUMER_APP.herokuapp.com/auth/heroku/callback
+Creating $CONSUMER_APP... done</div>
+HEROKU_OAUTH_ID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</div>
+HEROKU_OAUTH_SECRET=YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY</div>
 ```
 
-Create another app that we will be triggering events on:
-```
-heroku create wh-trigger-app
-export TRIGGER_APP=wh-trigger-app
-```
-
-You'll need to install the CLI plugin first and opt your user into the webhooks beta:
+### Add OAuth Client to Consumer App
 
 ```
-heroku plugins:install heroku-webhooks
-heroku sudo labs:enable webhooks-beta-user -u $your_email
+# Add HEROKU_OAUTH_ID and HEROKU_OAUTH_SECRET to app config
+$ heroku config:set HEROKU_OAUTH_ID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX HEROKU_OAUTH_SECRET=YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY -a $CONSUMER_APP
 ```
 
-Then create a webhook:
+### Install the webhooks CLI plugin
 
 ```
-heroku webhooks:add --include api:release --url https://$HEROKU_APP.herokuapp.com/webhooks -s "$(heroku config:get WEBHOOK_SECRET)" -l sync -a $TRIGGER_APP
+$ heroku plugins:install heroku-webhooks
 ```
 
-Open the webhooks consumer app:
+### Create an app $TRIGGER_APP that we will be triggering events on.
 
 ```
-heroku open
+$ heroku create -n
 ```
 
-Trigger an event:
+### Create a release webhook
 
 ```
-heroku config:set FOO=1 -a $TRIGGER_APP
+$ heroku webhooks:add --include api:release --url https://$CONSUMER_APP.herokuapp.com/webhooks -s "$(heroku config:get WEBHOOK_SECRET -a $CONSUMER_APP)" -l sync -a $TRIGGER_APP
+```
+
+### Trigger a release by setting a config var
+
+```
+$ heroku config:set FOO=bar -a $TRIGGER_APP
+```
+
+### Open the webhooks consumer app and log in
+
+```
+$ heroku open -a $CONSUMER_APP
 ```
