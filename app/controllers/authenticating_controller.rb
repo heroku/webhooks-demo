@@ -20,7 +20,7 @@ module AuthenticatingController
   end
 
   def authenticate_user!
-    session = cookies.encrypted['_session_id']
+    session = cookies.encrypted[:_session_id]
     if session && session['token'] && session['email']
       heroku_api = PlatformAPI.connect_oauth(session['token'])
 
@@ -47,13 +47,13 @@ module AuthenticatingController
       unless authenticate_user!
         respond_to do |format|
           format.html { redirect_to login_path }
-          format.json { render json: {'error' => 'not_logged_in'}, status: :forbidden}
+          format.json { render json: {'error' => 'not_logged_in'}, status: :unauthorized}
         end
       end
     rescue Excon::Error::Unauthorized
       respond_to do |format|
         format.html { redirect_to login_path }
-        format.json { render json: {'error' => 'unauthorized'}, status: :forbidden}
+        format.json { render json: {'error' => 'unauthorized'}, status: :unauthorized}
       end
     rescue Excon::Error::Forbidden
       respond_to do |format|
