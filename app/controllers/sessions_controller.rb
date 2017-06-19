@@ -1,8 +1,14 @@
 require 'platform-api'
 
-class SessionsController < ActionController::Base
+class SessionsController < ApplicationController
   def new
-    redirect_to "/auth/heroku"
+    if ENV['HEROKU_OAUTH_ID'] && ENV['HEROKU_OAUTH_SECRET']
+      redirect_to "/auth/heroku"
+    else
+      @app = heroku_app
+      @oauth_name = request.host
+      @oauth_url = request.base_url + "/auth/heroku/callback"
+    end
   end
 
   def create
