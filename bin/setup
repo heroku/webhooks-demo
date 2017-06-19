@@ -21,6 +21,12 @@ chdir APP_ROOT do
   puts "\n== Copying sample files =="
   unless File.exist?('.env')
     cp '.env.sample', '.env'
+
+    require 'securerandom'
+    open('.env', 'a') do |f|
+      f.puts "SECRET_KEY_BASE=#{SecureRandom.hex(64)}"
+      f.puts "WEBHOOK_SECRET=#{SecureRandom.hex(64)}"
+    end
   end
 
   puts "\n== Preparing database =="
