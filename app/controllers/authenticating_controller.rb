@@ -1,16 +1,30 @@
 module AuthenticatingController
   private
 
+  def heroku_app
+    if Rails.env.development?
+      dev_app = ENV['DEVELOPMENT_APP']
+      unless dev_app
+        raise 'Set DEVLOPMENT_APP to app to check auth against in dev'
+      end
+      dev_app
+    else
+      match = request.host.match(/(.*)\.herokuapp\.com$/)
+
+      unless match
+        raise 'Could not determine heroku app from host'
+      end
+
+      match[1]
+    end
+  end
+
   def authenticate_user!
     session = cookies.encrypted['_session_id']
     if session['token'] && session['email']
-      unless Rails.env.development?
-        host = request.env['HTTP_HOST']
-        app = host.match(/(.*)\.herokuapp\.com$/)[1]
+      heroku_api = PlatformAPI.connect_oauth(session['token'])
 
-        heroku_api = PlatformAPI.connect_oauth(session['token'])
-        heroku_api.app.info(app)
-      end
+      heroku_api.app.info(heroku_app)
 
       session['email']
     end

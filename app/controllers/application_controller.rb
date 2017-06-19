@@ -1,6 +1,8 @@
 require 'digest/md5'
 
 class ApplicationController < ActionController::Base
+  include AuthenticatingController
+
   before_action :set_gravatar
 
   private
