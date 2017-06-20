@@ -1,0 +1,36 @@
+<div class="pv3 ph3 w-100 center">
+  <div class="w-100 w-60-l center lh-copy">
+    <div class="f2">Introduction</div>
+    <div>
+      In order to secure the events that your target app emits this app verifies
+      that the currently logged in user has access to this app using Heroku
+      authentication.  Configuring authentication is a simple two step process.
+    </div>
+    <div class="f2">Create an OAuth Client</div>
+    <div>
+      <code class="db-m hk-badge-code mh3 mv3 db-m w-100">
+        <div>$ heroku clients:create <%= @oauth_name %> <%= @oauth_url %></div>
+        <div>Creating <%= @oauth_name %>... done</div>
+        <div>HEROKU_OAUTH_ID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</div>
+        <div>HEROKU_OAUTH_SECRET=YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY</div>
+      </code>
+    </div>
+    <div class="f2">Add OAuth Client to Consumer App</div>
+    <div>
+      <code class="db-m hk-badge-code mh3 mv3 db-m w-100">
+      <% if Rails.env.development? %>
+        <div># Add HEROKU_OAUTH_ID and HEROKU_OAUTH_SECRET to .env </div>
+        <div>HEROKU_OAUTH_ID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</div>
+        <div>HEROKU_OAUTH_SECRET=YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY</div>
+        <div>AUTHORIZATION_APP=app-to-check-authorization-against</div>
+        <div># Run locally with dotenv</div>
+        <div>dotenv rails s</div>
+      <% else %>
+        <div># Add HEROKU_OAUTH_ID and HEROKU_OAUTH_SECRET to app config</div>
+        <div>$ heroku config:set HEROKU_OAUTH_ID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX HEROKU_OAUTH_SECRET=YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY -a <%= @app %></div>
+        <div># Reload this page after the app restarts </div>
+      <% end %>
+      </code>
+    </div>
+  </div>
+</div>

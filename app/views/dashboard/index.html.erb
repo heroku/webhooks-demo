@@ -1,4 +1,21 @@
 <div class="flex-auto flex flex-row bg-white flex ph3">
+  <div class="dt w-100 w-80-l center">
+    <div class="f2">How to Install Webhooks CLI Plugin</div>
+    <div>
+      <code class="db-m hk-badge-code mh3 mv3 db-m w-100">
+        <div>$ heroku plugins:install heroku-webhooks</div>
+      </code>
+    </div>
+    <div class="f2">How to add a release webhook for $TRIGGER_APP</div>
+    <div>
+      <code class="db-m hk-badge-code mh3 mv3 db-m w-100">
+        <div>$ heroku webhooks:add --include api:release --url <%= @webhooks %> -s <%= @webhook_secret %> -l sync -a $TRIGGER_APP</div>
+      </code>
+    </div>
+  </div>
+</div>
+
+<div class="flex-auto flex flex-row bg-white flex ph3">
   <div class="events-list dt w-100 w-80-l center">
     <div class="dn dt-row-ns">
       <div class="db dtc-ns pv3 pr3 pl3-ns b bb b--light-gray dark-gray f5">Published At</div>
