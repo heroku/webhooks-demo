@@ -1,3 +1,3 @@
 class EventSerializer < ActiveModel::Serializer
-  attributes :payload
+  attributes :payload, :created_at
 end

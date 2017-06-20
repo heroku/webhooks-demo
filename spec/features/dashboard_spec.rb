@@ -10,10 +10,13 @@ RSpec.describe "Dashboard", type: :feature do
     visit '/'
 
     # wait for events from db to load and actioncable to connect
-    expect(page).to have_content("Events will appear as they are received by the application...")
+    expect(page).to have_selector('#loading-future', visible: true)
 
     cable_uuid = 'b0bddf33-9cd1-4556-9c29-9cdd9aa3125c'
     ActionCable.server.broadcast('events', {'payload' => {'id' => cable_uuid}})
+
+    expect(page).to have_selector('#loading-future-done', visible: true)
+    find(:css, '#loading-future-button').click
 
     expect(page).to have_content(db_uuid)
     expect(page).to have_content(cable_uuid)

@@ -15,31 +15,51 @@
   </div>
 </div>
 
+<div class="pv3 ph3 w-100 center">
+  <p class="w-100 w-80-l center lh-copy">
+    <button type="button" class="hk-button--async" id="loading-history-button">
+      <span class="hk-button__spinner mr1" id="loading-history">
+        <i class="hk-button__spinner__dot hk-button__spinner__dot--one"></i>
+        <i class="hk-button__spinner__dot hk-button__spinner__dot--two"></i>
+        <i class="hk-button__spinner__dot hk-button__spinner__dot--three"></i>
+      </span>
+      <span id="loading-history-text">Loading History ...</span><span id="loading-history-done" style="visibility: hidden"> done</span>
+    </button>
+  </p>
+
+  <p class="w-100 w-80-l center lh-copy">
+    <button type="button" class="hk-button--async" id="loading-future-button">
+      <span class="hk-button__spinner mr1" id="loading-future" style="visibility: hidden">
+        <i class="hk-button__spinner__dot hk-button__spinner__dot--one"></i>
+        <i class="hk-button__spinner__dot hk-button__spinner__dot--two"></i>
+        <i class="hk-button__spinner__dot hk-button__spinner__dot--three"></i>
+      </span>
+      <span id="loading-future-text">Events will appear as they are received by the application ...</span><span id="loading-future-done" style="visibility: hidden"> done</span>
+      </span>
+    </button>
+  </p>
+</div>
+
 <div class="flex-auto flex flex-row bg-white flex ph3">
-  <div class="events-list dt w-100 w-80-l center">
-    <div class="dn dt-row-ns">
-      <div class="db dtc-ns pv3 pr3 pl3-ns b bb b--light-gray dark-gray f5">Published At</div>
+  <div class="events-list dt w-100 w-80-l center" id="events-list">
+    <div class="dt-row-ns" id="events-list-header">
+      <div class="db dtc-ns pv3 pr3 pl3-ns b bb b--light-gray dark-gray f5">Received At</div>
       <div class="db dtc-ns pv3 pr3 b bb b--light-gray dark-gray f5">Resource</div>
       <div class="db dtc-ns pv3 pr3 b bb b--light-gray dark-gray f5">Action</div>
       <div class="db dtc-ns pv3 pr3 b bb b--light-gray dark-gray f5">Payload</div>
     </div>
   </div>
 </div>
-<div class="pv3 ph3 w-100 center">
-  <p class="w-100 w-80-l center lh-copy">
-    <span class="hk-button__spinner mh3">
-      <i class="hk-button__spinner__dot hk-button__spinner__dot--one"></i>
-      <i class="hk-button__spinner__dot hk-button__spinner__dot--two"></i>
-      <i class="hk-button__spinner__dot hk-button__spinner__dot--three"></i>
-    </span>
-    <span id="loading">Loading historical events...</span>
-  </p>
-</div>
 
 <script>
   $(document).ready(function(){
-    var render = function(data) {
-      var list = $('.events-list');
+    $('#loading-future-button').click(function() {
+      $('.events-list-row:hidden').show()
+      $('#loading-future-done').css('visibility','hidden')
+    })
+
+    var render = function(data, hide) {
+      var list = $('#events-list');
 
       if (list.length > 0) {
         var newListRow = $('<div>');
@@ -47,44 +67,49 @@
 
         var publishedAt = $('<div>');
         publishedAt.addClass('db dtc-ns pv1 pr3 pv3-ns pl3-ns f4');
-        publishedAt.text(data.payload.published_at);
-        $(newListRow).append(publishedAt);
+        publishedAt.text(data.created_at);
+        newListRow.append(publishedAt);
 
         var resource = $('<div>');
         resource.addClass('db dtc-ns pv1 pr3 pv3-ns f4');
         resource.text(data.payload.resource);
-        $(newListRow).append(resource);
+        newListRow.append(resource);
 
         var action = $('<div>');
         action.addClass('db dtc-ns pv1 pr3 pv3-ns f4');
         action.text(data.payload.action);
-        $(newListRow).append(action);
+        newListRow.append(action);
 
         var codeBlock = $('<pre>');
         codeBlock.addClass('events-payload db dtc-ns pv1 pr3 pv3-ns f4 lh-copy')
         codeBlock.text(JSON.stringify(data.payload, null, 2));
-        $(newListRow).append(codeBlock);
+        newListRow.append(codeBlock);
 
-        $(list).append(newListRow);
+        if (hide) {
+          newListRow.hide()
+        }
+
+        $('#events-list-header').after(newListRow);
       } else {
         throw "Events list not found!";
       }
     }
 
     $.ajax({url: "/events", dataType: 'json'}).done(function(events) {
-      $('#loading').text($('#loading').text() + ' done')
+      $('#loading-history').css('visibility','hidden')
+      $('#loading-history-done').css('visibility','visible')
 
       events.forEach(function(data) {
-        render(data)
+        render(data, false)
       })
 
       App.events = App.cable.subscriptions.create('EventsChannel', {
         received: function(data) {
-          render(data)
+          $('#loading-future-done').css('visibility','visible')
+          render(data, true)
         },
-
         connected: function() {
-          $('#loading').text('Events will appear as they are received by the application...')
+          $('#loading-future').css('visibility','visible')
         }
       });
     })
