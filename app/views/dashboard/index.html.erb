@@ -41,39 +41,39 @@
     })
 
     var render = function(data, hide) {
-      var list = $('#events-list');
+      var list = $('#events-list')
 
       if (list.length > 0) {
-        var newListRow = $('<div>');
-        newListRow.addClass('events-list-row dt-row-ns hover-bg-lightest-silver bb b--light-gray pv3 pv0-ns');
+        var newListRow = $('<div>')
+        newListRow.addClass('events-list-row dt-row-ns hover-bg-lightest-silver bb b--light-gray pv3 pv0-ns')
 
-        var publishedAt = $('<div>');
-        publishedAt.addClass('mw4-l db dtc-ns pv1 pr4 pv3-ns f4 lh-copy');
-        publishedAt.text(data.created_at);
-        newListRow.append(publishedAt);
+        var publishedAt = $('<div>')
+        publishedAt.addClass('mw4-l db dtc-ns pv1 pr4 pv3-ns f4 lh-copy')
+        publishedAt.text(data.created_at)
+        newListRow.append(publishedAt)
 
-        var resource = $('<div>');
-        resource.addClass('mw4-l db dtc-ns pv1 pr4 pv3-ns f4 lh-copy');
-        resource.text(data.payload.resource);
-        newListRow.append(resource);
+        var resource = $('<div>')
+        resource.addClass('mw4-l db dtc-ns pv1 pr4 pv3-ns f4 lh-copy')
+        resource.text(data.payload.resource)
+        newListRow.append(resource)
 
-        var action = $('<div>');
-        action.addClass('mw4-l db dtc-ns pv1 pr4 pv3-ns f4 lh-copy');
-        action.text(data.payload.action);
-        newListRow.append(action);
+        var action = $('<div>')
+        action.addClass('mw4-l db dtc-ns pv1 pr4 pv3-ns f4 lh-copy')
+        action.text(data.payload.action)
+        newListRow.append(action)
 
-        var codeBlock = $('<pre>');
+        var codeBlock = $('<pre>')
         codeBlock.addClass('events-payload db dtc-ns pv1 pr3 pv3-ns f4 lh-copy')
-        codeBlock.text(JSON.stringify(data.payload, null, 2));
-        newListRow.append(codeBlock);
+        codeBlock.text(JSON.stringify(data.payload, null, 2))
+        newListRow.append(codeBlock)
 
         if (hide) {
           newListRow.hide()
         }
 
-        $('#events-list-header').after(newListRow);
+        $('#events-list-header').after(newListRow)
       } else {
-        throw "Events list not found!";
+        throw "Events list not found!"
       }
     }
 
@@ -98,7 +98,7 @@
         connected: function() {
           $('#loading-future').css('visibility','visible')
         }
-      });
+      })
     })
-  });
+  })
 </script>
