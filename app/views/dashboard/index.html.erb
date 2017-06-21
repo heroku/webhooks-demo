@@ -1,52 +1,27 @@
-<div class="flex-auto flex flex-row bg-white flex ph3">
-  <div class="dt w-100 w-80-l center">
-    <div class="f2">How to Install Webhooks CLI Plugin</div>
-    <div>
-      <code class="db-m hk-badge-code mh3 mv3 db-m w-100">
-        <div>$ heroku plugins:install heroku-webhooks</div>
-      </code>
-    </div>
-    <div class="f2">How to add a release webhook for $TRIGGER_APP</div>
-    <div>
-      <code class="db-m hk-badge-code mh3 mv3 db-m w-100">
-        <div>$ heroku webhooks:add --include api:release --url <%= @webhooks %> -s <%= @webhook_secret %> -l sync -a $TRIGGER_APP</div>
-      </code>
+<div class="flex-auto pa3 tc-ns f5 items-center">
+  <div class="flex-ns items-center lh-copy">
+    <div class="dib mb2 mb0-ns">New events will appear as they are received by the application.</div>
+    <div class="hk-button__spinner ml2" id="">
+      <i class="hk-button__spinner__dot hk-button__spinner__dot--one"></i>
+      <i class="hk-button__spinner__dot hk-button__spinner__dot--two"></i>
+      <i class="hk-button__spinner__dot hk-button__spinner__dot--three"></i>
     </div>
   </div>
 </div>
 
 <div class="pv3 ph3 w-100 center">
-  <p class="w-100 w-80-l center lh-copy">
-    <button type="button" class="hk-button--async" id="loading-history-button">
-      <span class="hk-button__spinner mr1" id="loading-history">
-        <i class="hk-button__spinner__dot hk-button__spinner__dot--one"></i>
-        <i class="hk-button__spinner__dot hk-button__spinner__dot--two"></i>
-        <i class="hk-button__spinner__dot hk-button__spinner__dot--three"></i>
-      </span>
-      <span id="loading-history-text">Loading History ...</span><span id="loading-history-done" style="visibility: hidden"> done</span>
-    </button>
-  </p>
-
-  <p class="w-100 w-80-l center lh-copy">
-    <button type="button" class="hk-button--async" id="loading-future-button">
-      <span class="hk-button__spinner mr1" id="loading-future" style="visibility: hidden">
-        <i class="hk-button__spinner__dot hk-button__spinner__dot--one"></i>
-        <i class="hk-button__spinner__dot hk-button__spinner__dot--two"></i>
-        <i class="hk-button__spinner__dot hk-button__spinner__dot--three"></i>
-      </span>
-      <span id="loading-future-text">Events will appear as they are received by the application ...</span><span id="loading-future-done" style="visibility: hidden"> done</span>
-      </span>
-    </button>
-  </p>
+  <button type="button" class="pointer outline-transparent tl w-100 tc mb3 bg-light-blue hover-bg-blue white b br1 ba b--light-gray pa2" id="loading-future-button" style="display: none">
+    <span id="loading-future-done"> 13 New Event</span>
+  </button>
 </div>
 
 <div class="flex-auto flex flex-row bg-white flex ph3">
-  <div class="events-list dt w-100 w-80-l center" id="events-list">
+  <div class="events-list dt w-100 center" id="events-list">
     <div class="dt-row-ns" id="events-list-header">
-      <div class="db dtc-ns pv3 pr3 pl3-ns b bb b--light-gray dark-gray f5">Received At</div>
-      <div class="db dtc-ns pv3 pr3 b bb b--light-gray dark-gray f5">Resource</div>
-      <div class="db dtc-ns pv3 pr3 b bb b--light-gray dark-gray f5">Action</div>
-      <div class="db dtc-ns pv3 pr3 b bb b--light-gray dark-gray f5">Payload</div>
+      <div class="dn dtc-ns pv3 pr3 b bb b--light-gray dark-gray f5">Received At</div>
+      <div class="dn dtc-ns pv3 pr3 b bb b--light-gray dark-gray f5">Resource</div>
+      <div class="dn dtc-ns pv3 pr3 b bb b--light-gray dark-gray f5">Action</div>
+      <div class="dn dtc-ns pv3 pr3 b bb b--light-gray dark-gray f5">Payload</div>
     </div>
   </div>
 </div>
@@ -54,8 +29,8 @@
 <script>
   $(document).ready(function(){
     $('#loading-future-button').click(function() {
-      $('.events-list-row:hidden').show()
-      $('#loading-future-done').css('visibility','hidden')
+      $('.events-list-row:hidden').slideDown()
+      $('#loading-future-button').slideUp()
     })
 
     var render = function(data, hide) {
@@ -66,17 +41,17 @@
         newListRow.addClass('events-list-row dt-row-ns hover-bg-lightest-silver bb b--light-gray pv3 pv0-ns');
 
         var publishedAt = $('<div>');
-        publishedAt.addClass('db dtc-ns pv1 pr3 pv3-ns pl3-ns f4');
+        publishedAt.addClass('mw4-l db dtc-ns pv1 pr4 pv3-ns f4 lh-copy');
         publishedAt.text(data.created_at);
         newListRow.append(publishedAt);
 
         var resource = $('<div>');
-        resource.addClass('db dtc-ns pv1 pr3 pv3-ns f4');
+        resource.addClass('mw4-l db dtc-ns pv1 pr4 pv3-ns f4 lh-copy');
         resource.text(data.payload.resource);
         newListRow.append(resource);
 
         var action = $('<div>');
-        action.addClass('db dtc-ns pv1 pr3 pv3-ns f4');
+        action.addClass('mw4-l db dtc-ns pv1 pr4 pv3-ns f4 lh-copy');
         action.text(data.payload.action);
         newListRow.append(action);
 
@@ -105,7 +80,7 @@
 
       App.events = App.cable.subscriptions.create('EventsChannel', {
         received: function(data) {
-          $('#loading-future-done').css('visibility','visible')
+          $('#loading-future-button').slideDown()
           render(data, true)
         },
         connected: function() {

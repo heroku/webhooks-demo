@@ -14,8 +14,8 @@
 
   <body>
     <div class="container flex flex-column">
-      <div class="flex flex-row bg-white flex bg-gradient-secondary mb5 pa3 items-center">
-        <div class="f3-ns b white flex-auto">Webhooks Consumer</div>
+      <div class="header pv2 ph3 bg-gradient-secondary bb b--black-10 w-100 shadow-outer-1 flex items-center">
+        <div class="f3-ns b white mr4 flex-auto">Webhooks Consumer</div>
         <ul class="white list pa0 ma0">
           <% if session[:email] %>
             <li class="link ml3 dib v-mid b"><a href="/logout" class="link white">Logout</a></li>
@@ -28,6 +28,19 @@
           </li>
         </ul>
       </div>
+
+      <script type="text/javascript">
+        document.title = '(4) Webhooks Consumer';
+      </script>
+
+      <div class="w-100 mb3 flex f4 dark-gray">
+        <a href="/" class="link gray pa3 bb b--light-silver hover-b--gray purple b--purple">Webhook Events</a>
+        <a href="/setup" class="link gray pa3 bb b--light-silver hover-b--gray">Setup</a>
+
+        <div class="flex-auto bb b--light-silver pa3 tr f5 items-center">
+        </div>
+      </div>
+
       <%= yield %>
     </div>
   </body>
