@@ -11,7 +11,7 @@
 
 <div class="pv3 ph3 w-100 center">
   <button type="button" class="pointer outline-transparent tl w-100 tc mb3 bg-light-blue hover-bg-blue white b br1 ba b--light-gray pa2" id="loading-future-button" style="display: none">
-    <span id="loading-future-done"> 13 New Event</span>
+    <span id="loading-future-done"></span>
   </button>
 </div>
 
@@ -28,9 +28,16 @@
 
 <script>
   $(document).ready(function(){
+
+    var numEvents = 0
+
     $('#loading-future-button').click(function() {
       $('.events-list-row:hidden').slideDown()
       $('#loading-future-button').slideUp()
+
+      numEvents = 0
+
+      document.title = 'Webhooks Consumer Demo'
     })
 
     var render = function(data, hide) {
@@ -80,6 +87,11 @@
 
       App.events = App.cable.subscriptions.create('EventsChannel', {
         received: function(data) {
+          numEvents++
+
+          $('#loading-future-done').text(numEvents + ' New Event' + (numEvents > 1 ? 's' : ''))
+          document.title = '(' + numEvents + ') Webhooks Consumer Demo'
+
           $('#loading-future-button').slideDown()
           render(data, true)
         },
