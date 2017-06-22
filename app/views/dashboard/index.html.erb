@@ -78,9 +78,6 @@
     }
 
     $.ajax({url: "/events", dataType: 'json'}).done(function(events) {
-      $('#loading-history').css('visibility','hidden')
-      $('#loading-history-done').css('visibility','visible')
-
       events.forEach(function(data) {
         render(data, false)
       })
