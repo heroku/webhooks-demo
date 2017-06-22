@@ -5,3 +5,10 @@
 .events-list {
   border-collapse: collapse;
 }
+
+.code-block:before {
+  content: '$';
+  display: inline-block;
+  position: absolute;
+  left: 15px;
+}
