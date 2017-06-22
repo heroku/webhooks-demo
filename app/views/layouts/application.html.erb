@@ -10,6 +10,9 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
     <%= action_cable_meta_tag %>
+
+    <%= javascript_include_tag 'tabs', 'data-turbolinks-track': 'reload' %>
+    <%= yield :head %>
   </head>
 
   <body>
@@ -46,18 +49,6 @@
         <div class="flex-auto bb b--light-silver pa3 tr f5 items-center">
         </div>
       </div>
-
-      <script>
-        $(document).ready(function() {
-          var path = window.location.pathname
-          $('#tabs > a').each(function(_, a) {
-            var tab = $(a)
-            if (tab.attr('href') === path) {
-              tab.addClass('purple b--purple')
-            }
-          })
-        })
-      </script>
 
       <%= yield %>
     </div>
