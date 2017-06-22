@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :webhooks, only: [:create]
   resources :events, only: [:index]
   resources :dashboard, only: [:index]
+  resources :setup, only: [:index]
 
   root to: "dashboard#index"
 

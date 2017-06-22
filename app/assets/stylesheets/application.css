@@ -1,7 +1,14 @@
-html, body {
-  height: 100%;
+* {
+  box-sizing: border-box;
 }
 
 .events-list {
   border-collapse: collapse;
+}
+
+.code-block:before {
+  content: '$';
+  display: inline-block;
+  position: absolute;
+  left: 15px;
 }

@@ -1,92 +1,101 @@
-<div class="flex-auto flex flex-row bg-white flex ph3">
-  <div class="dt w-100 w-80-l center">
-    <div class="f2">How to Install Webhooks CLI Plugin</div>
-    <div>
-      <code class="db-m hk-badge-code mh3 mv3 db-m w-100">
-        <div>$ heroku plugins:install heroku-webhooks</div>
-      </code>
-    </div>
-    <div class="f2">How to add a release webhook for $TRIGGER_APP</div>
-    <div>
-      <code class="db-m hk-badge-code mh3 mv3 db-m w-100">
-        <div>$ heroku webhooks:add --include api:release --url <%= @webhooks %> -s <%= @webhook_secret %> -l sync -a $TRIGGER_APP</div>
-      </code>
+<div class="flex-auto pa3 tc-ns f5 items-center">
+  <div class="flex-ns items-center lh-copy">
+    <div class="dib mb2 mb0-ns">New events will appear as they are received by the application.</div>
+    <div class="hk-button__spinner ml2" id="loading-future" style="visibility: hidden">
+      <i class="hk-button__spinner__dot hk-button__spinner__dot--one"></i>
+      <i class="hk-button__spinner__dot hk-button__spinner__dot--two"></i>
+      <i class="hk-button__spinner__dot hk-button__spinner__dot--three"></i>
     </div>
   </div>
 </div>
 
+<div class="pv3 ph3 w-100 center">
+  <button type="button" class="pointer outline-transparent tl w-100 tc mb3 bg-light-blue hover-bg-blue white b br1 ba b--light-gray pa2" id="loading-future-button" style="display: none">
+    <span id="loading-future-done"></span>
+  </button>
+</div>
+
 <div class="flex-auto flex flex-row bg-white flex ph3">
-  <div class="events-list dt w-100 w-80-l center">
-    <div class="dn dt-row-ns">
-      <div class="db dtc-ns pv3 pr3 pl3-ns b bb b--light-gray dark-gray f5">Published At</div>
-      <div class="db dtc-ns pv3 pr3 b bb b--light-gray dark-gray f5">Resource</div>
-      <div class="db dtc-ns pv3 pr3 b bb b--light-gray dark-gray f5">Action</div>
-      <div class="db dtc-ns pv3 pr3 b bb b--light-gray dark-gray f5">Payload</div>
+  <div class="events-list dt w-100 center" id="events-list">
+    <div class="dt-row-ns" id="events-list-header">
+      <div class="dn dtc-ns pv3 pr3 b bb b--light-gray dark-gray f5">Received At</div>
+      <div class="dn dtc-ns pv3 pr3 b bb b--light-gray dark-gray f5">Resource</div>
+      <div class="dn dtc-ns pv3 pr3 b bb b--light-gray dark-gray f5">Action</div>
+      <div class="dn dtc-ns pv3 pr3 b bb b--light-gray dark-gray f5">Payload</div>
     </div>
   </div>
-</div>
-<div class="pv3 ph3 w-100 center">
-  <p class="w-100 w-80-l center lh-copy">
-    <span class="hk-button__spinner mh3">
-      <i class="hk-button__spinner__dot hk-button__spinner__dot--one"></i>
-      <i class="hk-button__spinner__dot hk-button__spinner__dot--two"></i>
-      <i class="hk-button__spinner__dot hk-button__spinner__dot--three"></i>
-    </span>
-    <span id="loading">Loading historical events...</span>
-  </p>
 </div>
 
 <script>
   $(document).ready(function(){
-    var render = function(data) {
-      var list = $('.events-list');
+
+    var numEvents = 0
+
+    $('#loading-future-button').click(function() {
+      $('.events-list-row:hidden').slideDown()
+      $('#loading-future-button').slideUp()
+
+      numEvents = 0
+
+      document.title = 'Webhooks Consumer Demo'
+    })
+
+    var render = function(data, hide) {
+      var list = $('#events-list')
 
       if (list.length > 0) {
-        var newListRow = $('<div>');
-        newListRow.addClass('events-list-row dt-row-ns hover-bg-lightest-silver bb b--light-gray pv3 pv0-ns');
+        var newListRow = $('<div>')
+        newListRow.addClass('events-list-row dt-row-ns hover-bg-lightest-silver bb b--light-gray pv3 pv0-ns')
 
-        var publishedAt = $('<div>');
-        publishedAt.addClass('db dtc-ns pv1 pr3 pv3-ns pl3-ns f4');
-        publishedAt.text(data.payload.published_at);
-        $(newListRow).append(publishedAt);
+        var publishedAt = $('<div>')
+        publishedAt.addClass('mw4-l db dtc-ns pv1 pr4 pv3-ns f4 lh-copy')
+        publishedAt.text(data.created_at)
+        newListRow.append(publishedAt)
 
-        var resource = $('<div>');
-        resource.addClass('db dtc-ns pv1 pr3 pv3-ns f4');
-        resource.text(data.payload.resource);
-        $(newListRow).append(resource);
+        var resource = $('<div>')
+        resource.addClass('mw4-l db dtc-ns pv1 pr4 pv3-ns f4 lh-copy')
+        resource.text(data.payload.resource)
+        newListRow.append(resource)
 
-        var action = $('<div>');
-        action.addClass('db dtc-ns pv1 pr3 pv3-ns f4');
-        action.text(data.payload.action);
-        $(newListRow).append(action);
+        var action = $('<div>')
+        action.addClass('mw4-l db dtc-ns pv1 pr4 pv3-ns f4 lh-copy')
+        action.text(data.payload.action)
+        newListRow.append(action)
 
-        var codeBlock = $('<pre>');
+        var codeBlock = $('<pre>')
         codeBlock.addClass('events-payload db dtc-ns pv1 pr3 pv3-ns f4 lh-copy')
-        codeBlock.text(JSON.stringify(data.payload, null, 2));
-        $(newListRow).append(codeBlock);
+        codeBlock.text(JSON.stringify(data.payload, null, 2))
+        newListRow.append(codeBlock)
 
-        $(list).append(newListRow);
+        if (hide) {
+          newListRow.hide()
+        }
+
+        $('#events-list-header').after(newListRow)
       } else {
-        throw "Events list not found!";
+        throw "Events list not found!"
       }
     }
 
     $.ajax({url: "/events", dataType: 'json'}).done(function(events) {
-      $('#loading').text($('#loading').text() + ' done')
-
       events.forEach(function(data) {
-        render(data)
+        render(data, false)
       })
 
       App.events = App.cable.subscriptions.create('EventsChannel', {
         received: function(data) {
-          render(data)
-        },
+          numEvents++
 
+          $('#loading-future-done').text(numEvents + ' New Event' + (numEvents > 1 ? 's' : ''))
+          document.title = '(' + numEvents + ') Webhooks Consumer Demo'
+
+          $('#loading-future-button').slideDown()
+          render(data, true)
+        },
         connected: function() {
-          $('#loading').text('Events will appear as they are received by the application...')
+          $('#loading-future').css('visibility','visible')
         }
-      });
+      })
     })
-  });
+  })
 </script>

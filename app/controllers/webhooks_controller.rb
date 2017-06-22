@@ -2,6 +2,8 @@ class WebhooksController < ActionController::API
   def create
     if valid_signature?
       event = Event.create(payload: params['webhook'])
+      event.reload # reload for predictable payload key ordering
+
       serialized_event = ActiveModelSerializers::SerializableResource.new(event, {serializer: EventSerializer})
       ActionCable.server.broadcast 'events', serialized_event
 
