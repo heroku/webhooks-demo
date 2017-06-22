@@ -32,7 +32,8 @@
       <i class="hk-button__spinner__dot hk-button__spinner__dot--two"></i>
       <i class="hk-button__spinner__dot hk-button__spinner__dot--three"></i>
     </span>
-    Events will appear as they are received by the application.</p>
+    <span id="loading">Loading historical events...</span>
+  </p>
 </div>
 
 <script>
@@ -70,14 +71,20 @@
       }
     }
 
-    $.ajax({url: "/events", dataType: 'json'}).done(function(data) {
-      data.forEach(function(foo) {
-        render(foo)
+    $.ajax({url: "/events", dataType: 'json'}).done(function(events) {
+      $('#loading').text($('#loading').text() + ' done')
+
+      events.forEach(function(data) {
+        render(data)
       })
 
       App.events = App.cable.subscriptions.create('EventsChannel', {
         received: function(data) {
           render(data)
+        },
+
+        connected: function() {
+          $('#loading').text('Events will appear as they are received by the application...')
         }
       });
     })
