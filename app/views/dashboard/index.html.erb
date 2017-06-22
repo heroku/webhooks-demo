@@ -71,11 +71,11 @@
       }
     }
 
-    $.ajax({url: "/events", dataType: 'json'}).done(function(data) {
+    $.ajax({url: "/events", dataType: 'json'}).done(function(events) {
       $('#loading').text($('#loading').text() + ' done')
 
-      data.forEach(function(foo) {
-        render(foo)
+      events.forEach(function(data) {
+        render(data)
       })
 
       App.events = App.cable.subscriptions.create('EventsChannel', {
