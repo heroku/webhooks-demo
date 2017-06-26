@@ -3,7 +3,7 @@ $(document).ready(function() {
   $('#tabs > a').each(function(_, a) {
     var tab = $(a)
     if (tab.attr('href') === path) {
-      tab.addClass('purple b--purple')
+      tab.addClass('b--purple')
     }
   })
 })
