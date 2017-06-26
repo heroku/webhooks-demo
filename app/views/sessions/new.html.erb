@@ -31,9 +31,18 @@
         </div>
       </section>
         <% else %>
+        <p class="lh-copy f4 dark-gray">Add HEROKU_OAUTH_ID and HEROKU_OAUTH_SECRET to app config</p>
         <div class="code-block relative lh-copy mv3 w-100 bg-light-gray code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
-          <div># Add HEROKU_OAUTH_ID and HEROKU_OAUTH_SECRET to app config</div>
-          <div>heroku config:set HEROKU_OAUTH_ID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX HEROKU_OAUTH_SECRET=YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY -a <%= @app %></div>
+          <div>heroku config:set HEROKU_OAUTH_ID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX -a <%= @app %></div>
+          <div>Setting HEROKU_OAUTH_ID and restarting ⬢ <%= @app %>... done, v3</div>
+          <div>▸    Warning: The "HEROKU_" namespace is protected and shouldn't be used.</div>
+          <div>HEROKU_OAUTH_ID:     XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</div>
+        </div>
+        <div class="code-block relative lh-copy mv3 w-100 bg-light-gray code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
+          <div>heroku config:set HEROKU_OAUTH_SECRET=YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY -a <%= @app %></div>
+          <div>Setting HEROKU_OAUTH_SECRET and restarting ⬢ <%= @app %>... done, v3</div>
+          <div>▸    Warning: The "HEROKU_" namespace is protected and shouldn't be used.</div>
+          <div>HEROKU_OAUTH_SECRET: YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY</div>
         </div>
       </section>
       <section class="mb4">

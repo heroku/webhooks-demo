@@ -30,10 +30,16 @@ HEROKU_OAUTH_SECRET=YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY
 ### Add OAuth Client to viewer app
 
 ```
-$ heroku config:set HEROKU_OAUTH_ID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX HEROKU_OAUTH_SECRET=YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY -a $VIEWER_APP
-Setting HEROKU_OAUTH_ID, HEROKU_OAUTH_SECRET and restarting ⬢ $VIEWER_APP... done, v3
+$ heroku config:set HEROKU_OAUTH_ID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX -a $VIEWER_APP
+Setting HEROKU_OAUTH_ID and restarting ⬢ $VIEWER_APP... done, v3
  ▸    Warning: The "HEROKU_" namespace is protected and shouldn't be used.
 HEROKU_OAUTH_ID:     XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+```
+
+```
+$ heroku config:set HEROKU_OAUTH_SECRET=YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY -a $VIEWER_APP
+Setting HEROKU_OAUTH_SECRET and restarting ⬢ $VIEWER_APP... done, v3
+ ▸    Warning: The "HEROKU_" namespace is protected and shouldn't be used.
 HEROKU_OAUTH_SECRET: YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY
 ```
 
