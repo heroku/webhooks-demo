@@ -55,7 +55,7 @@ https://$TRIGGER_APP.herokuapp.com/ | https://git.heroku.com/$TRIGGER_APP.git
 ### Create a release webhook
 
 ```
-$ heroku webhooks:add --include api:release --url https://$CONSUMER_APP.herokuapp.com/webhooks -s "$(heroku config:get WEBHOOK_SECRET -a $CONSUMER_APP)" -l sync -a $TRIGGER_APP
+$ heroku webhooks:add --include api:release -l sync --url https://$CONSUMER_APP.herokuapp.com/webhooks -s "$(heroku config:get WEBHOOK_SECRET -a $CONSUMER_APP)" -a $TRIGGER_APP
 Adding webhook to ⬢ $TRIGGER_APP... done
 ```
 
