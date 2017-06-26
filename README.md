@@ -1,8 +1,20 @@
-# README
+# Webhooks Consumer Demo
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/heroku/webhooks-consumer-demo)
 
-## Guide
+## Online Guide
+
+### Deploy and Launch the Application
+
+Deploy this button and then click on the `View` link and follow the OAuth Configuration Instructions to log in.
+
+![View](public/manage.png)
+
+### Follow Setup Instructions to Create Webhooks
+
+![Setup](public/setup.png)
+
+## Offline Guide
 
 First, deploy this button and replace `$CONSUMER_APP` in the directions with the app that was created.
 
