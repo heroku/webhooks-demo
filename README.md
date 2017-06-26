@@ -63,3 +63,5 @@ $ heroku config:set FOO=bar -a $TRIGGER_APP
 ```
 $ heroku open -a $CONSUMER_APP
 ```
+
+At this point you should see the release in the webhook event listing.
