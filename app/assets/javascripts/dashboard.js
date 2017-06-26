@@ -7,7 +7,7 @@ $(document).ready(function(){
 
     numEvents = 0
 
-    document.title = 'Webhooks Consumer Demo'
+    document.title = 'Webhooks Viewer Demo'
   })
 
   var render = function(data, hide) {
@@ -57,7 +57,7 @@ $(document).ready(function(){
         numEvents++
 
         $('#loading-future-done').text(numEvents + ' New Event' + (numEvents > 1 ? 's' : ''))
-        document.title = '(' + numEvents + ') Webhooks Consumer Demo'
+        document.title = '(' + numEvents + ') Webhooks Viewer Demo'
 
         $('#loading-future-button').slideDown()
         render(data, true)
