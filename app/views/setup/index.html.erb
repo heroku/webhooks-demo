@@ -1,20 +1,34 @@
 <div class="ph3 mt4">
   <div class="dt w-100 w-80-l mw9 center">
-    <section class="mb4">
+    <section class="mb5">
       <div class="f2 mb4 lh-title">Setting up the webhooks CLI plugin</div>
       <div class="code-block relative lh-copy mv3 w-100 bg-light-gray code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
         <div>heroku plugins:install heroku-webhooks</div>
+      </div>
+    </section>
+
+    <div class="f5 mv4 b dark-gray">Your output should look something like this:</div>
+
+    <section class="mb6 br1">
+      <div class="code-block relative lh-copy w-100 bg-black code pa2 pl5 white word-wrap br1">
         <div>Installing plugin heroku-webhooks... done</div>
       </div>
     </section>
-    <section class="mb4">
+
+    <section class="mb5">
       <div class="f2 mb4 lh-title">Add a release webhook for $TRIGGER_APP</div>
       <div>
       <div class="code-block relative lh-copy mv3 w-100 bg-light-gray code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
         <div>heroku webhooks:add --include api:release -l sync --url <%= @webhooks %> -s <%= @webhook_secret %> -a $TRIGGER_APP</div>
+      </div>
+    </section>
+
+    <div class="f5 mv4 b dark-gray">Your output should look something like this:</div>
+
+    <section class="mb6 br1">
+      <div class="code-block relative lh-copy w-100 bg-black code pa2 pl5 white word-wrap br1">
         <div>Adding webhook to ⬢ $TRIGGER_APP... done</div>
       </div>
     </section>
-    </div>
   </div>
 </div>
