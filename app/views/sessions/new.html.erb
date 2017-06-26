@@ -12,6 +12,11 @@
       <div class="f2 mb4 lh-title">Create an OAuth Client</div>
       <div class="code-block relative lh-copy mv3 w-100 bg-light-gray code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
         <div>heroku clients:create <%= @oauth_name %> <%= @oauth_url %></div>
+      </div>
+    </section>
+    <div class="f5 mv4 b dark-gray">Your output should look something like this:</div>
+    <section class="mb6 br1">
+      <div class="lh-copy w-100 bg-black code pa2 pl4 white word-wrap br1">
         <div>Creating <%= @oauth_name %>... done</div>
         <div>HEROKU_OAUTH_ID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</div>
         <div>HEROKU_OAUTH_SECRET=YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY</div>
@@ -21,27 +26,29 @@
       <div class="f2 mb4 lh-title">Add OAuth Client to Consumer App</div>
       <% if Rails.env.development? %>
         <div class="code-block relative lh-copy mv3 w-100 bg-light-gray code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
-          <div># Add HEROKU_OAUTH_ID and HEROKU_OAUTH_SECRET to .env </div>
-          <div>HEROKU_OAUTH_ID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</div>
-          <div>HEROKU_OAUTH_SECRET=YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY</div>
-          <div>AUTHORIZATION_APP=app-to-check-authorization-against</div>
-          <br />
-          <div># Run locally with dotenv</div>
+          <div>echo "HEROKU_OAUTH_ID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" >> .env</div>
+        </div>
+        <div class="code-block relative lh-copy mv3 w-100 bg-light-gray code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
+          <div>echo "HEROKU_OAUTH_SECRET=YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY" >> .env</div>
+        </div>
+        <div class="code-block relative lh-copy mv3 w-100 bg-light-gray code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
+          <div>echo "AUTHORIZATION_APP=app-to-check-authorization-against" >> .env</div>
+        </div>
+        <div class="code-block relative lh-copy mv3 w-100 bg-light-gray code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
           <div>dotenv rails s</div>
         </div>
       </section>
         <% else %>
-        <p class="lh-copy f4 dark-gray">Add HEROKU_OAUTH_ID and HEROKU_OAUTH_SECRET to app config</p>
         <div class="code-block relative lh-copy mv3 w-100 bg-light-gray code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
-          <div>heroku config:set HEROKU_OAUTH_ID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX -a <%= @app %></div>
-          <div>Setting HEROKU_OAUTH_ID and restarting ⬢ <%= @app %>... done, v3</div>
+          <div>heroku config:set -a <%= @app %> HEROKU_OAUTH_ID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX HEROKU_OAUTH_SECRET=YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY</div>
+        </div>
+      </section>
+      <div class="f5 mv4 b dark-gray">Your output should look something like this:</div>
+      <section class="mb6 br1">
+        <div class="lh-copy w-100 bg-black code pa2 pl4 white word-wrap br1">
+          <div>Setting HEROKU_OAUTH_ID, HEROKU_OAUTH_SECRET and restarting ⬢ <%= @app %>... done, v3</div>
           <div>▸    Warning: The "HEROKU_" namespace is protected and shouldn't be used.</div>
           <div>HEROKU_OAUTH_ID:     XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</div>
-        </div>
-        <div class="code-block relative lh-copy mv3 w-100 bg-light-gray code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
-          <div>heroku config:set HEROKU_OAUTH_SECRET=YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY -a <%= @app %></div>
-          <div>Setting HEROKU_OAUTH_SECRET and restarting ⬢ <%= @app %>... done, v3</div>
-          <div>▸    Warning: The "HEROKU_" namespace is protected and shouldn't be used.</div>
           <div>HEROKU_OAUTH_SECRET: YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY</div>
         </div>
       </section>
