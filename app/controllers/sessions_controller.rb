@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
     session[:token] = request.env['omniauth.auth']['credentials']['token']
     session[:email] = request.env['omniauth.auth']['info']['email']
 
-    redirect_to "/dashboard"
+    redirect_to root_path
   end
 
   def logout
