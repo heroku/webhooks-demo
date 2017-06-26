@@ -1,11 +1,14 @@
 <div class="ph3 mt4">
   <div class="dt w-100 w-80-l mw9 center">
 
-    <section class="mb6">
+    <section class="mb4">
       <div class="f2 mb4 lh-title">Introduction</div>
-      <p class="lh-copy f4 dark-gray">In order to secure the events that your target app emits this app verifies that the currently logged in user has access to this app using Heroku authentication.  Configuring authentication is a simple two step process.</p>
+      <p class="lh-copy f4 dark-gray">
+        In order to secure the events that your target app emits this app verifies that the currently logged in user has access to this app using Heroku authentication.
+        Configuring authentication is a simple two step process and after successfully following these instructions, you should no longer see this page.
+      </p>
     </section>
-    <section class="mb6">
+    <section class="mb4">
       <div class="f2 mb4 lh-title">Create an OAuth Client</div>
       <div class="code-block relative lh-copy mv3 w-100 bg-light-gray code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
         <div>heroku clients:create <%= @oauth_name %> <%= @oauth_url %></div>
@@ -14,10 +17,10 @@
         <div>HEROKU_OAUTH_SECRET=YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY</div>
       </div>
     </section>
-    <section class="mb6">
+    <section class="mb4">
       <div class="f2 mb4 lh-title">Add OAuth Client to Consumer App</div>
-      <div class="code-block relative lh-copy mv3 w-100 bg-light-gray code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
-        <% if Rails.env.development? %>
+      <% if Rails.env.development? %>
+        <div class="code-block relative lh-copy mv3 w-100 bg-light-gray code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
           <div># Add HEROKU_OAUTH_ID and HEROKU_OAUTH_SECRET to .env </div>
           <div>HEROKU_OAUTH_ID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</div>
           <div>HEROKU_OAUTH_SECRET=YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY</div>
@@ -25,13 +28,20 @@
           <br />
           <div># Run locally with dotenv</div>
           <div>dotenv rails s</div>
+        </div>
+      </section>
         <% else %>
+        <div class="code-block relative lh-copy mv3 w-100 bg-light-gray code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
           <div># Add HEROKU_OAUTH_ID and HEROKU_OAUTH_SECRET to app config</div>
           <div>heroku config:set HEROKU_OAUTH_ID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX HEROKU_OAUTH_SECRET=YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY -a <%= @app %></div>
-          <br />
-          <div># Reload this page after the app restarts </div>
+        </div>
+      </section>
+      <section class="mb4">
+        <div class="f2 mb4 lh-title">Log Into the App</div>
+        <p class="lh-copy f4 dark-gray">
+          Once the app has restarted go to the <a href="/">webhooks events</a> page to log in.
+        </p>
+      </section>
         <% end %>
-      </div>
-    </section>
   </div>
 </div>
