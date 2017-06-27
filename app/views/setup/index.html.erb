@@ -9,15 +9,30 @@
 
     <div class="f5 mv4 b dark-gray">Your output should look something like this:</div>
 
-    <section class="mb6 br1">
+    <section class="mb5 br1">
       <div class="lh-copy w-100 bg-black code pa2 pl4 white word-wrap br1">
         <div>Installing plugin heroku-webhooks... done</div>
       </div>
     </section>
 
     <section class="mb5">
+      <div class="f2 mb4 lh-title">Create an app $TRIGGER_APP that we will be triggering events on</div>
+      <div class="code-block relative lh-copy mv3 w-100 bg-light-gray code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
+        <div>heroku create -n</div>
+      </div>
+    </section>
+
+    <div class="f5 mv4 b dark-gray">Your output should look something like this:</div>
+
+    <section class="mb5 br1">
+      <div class="lh-copy w-100 bg-black code pa2 pl4 white word-wrap br1">
+        <div>Creating app... done, ⬢ $TRIGGER_APP</div>
+        <div>https://$TRIGGER_APP.herokuapp.com/ | https://git.heroku.com/$TRIGGER_APP.git</div>
+      </div>
+    </section>
+
+    <section class="mb5">
       <div class="f2 mb4 lh-title">Add a release webhook for $TRIGGER_APP</div>
-      <div>
       <div class="code-block relative lh-copy mv3 w-100 bg-light-gray code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
         <div>heroku webhooks:add --include api:release -l sync --url <%= @webhooks %> -s <%= @webhook_secret %> -a $TRIGGER_APP</div>
       </div>
@@ -25,10 +40,30 @@
 
     <div class="f5 mv4 b dark-gray">Your output should look something like this:</div>
 
-    <section class="mb6 br1">
+    <section class="mb5 br1">
       <div class="lh-copy w-100 bg-black code pa2 pl4 white word-wrap br1">
         <div>Adding webhook to ⬢ $TRIGGER_APP... done</div>
       </div>
+    </section>
+
+    <section class="mb5">
+      <div class="f2 mb4 lh-title">Trigger a release by setting a config var</div>
+      <div class="code-block relative lh-copy mv3 w-100 bg-light-gray code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
+        <div>heroku config:set FOO=bar -a $TRIGGER_APP</div>
+      </div>
+    </section>
+
+    <div class="f5 mv4 b dark-gray">Your output should look something like this:</div>
+
+    <section class="mb5 br1">
+      <div class="lh-copy w-100 bg-black code pa2 pl4 white word-wrap br1">
+        <div>Setting FOO and restarting ⬢ $TRIGGER_APP... done, v3</div>
+        <div>FOO: bar</div>
+      </div>
+    </section>
+
+    <section class="mb5">
+      <div class="f2 mb4 lh-title">Open the <a href="/">webhooks viewer dashboard</a> to view the release event</div>
     </section>
   </div>
 </div>
