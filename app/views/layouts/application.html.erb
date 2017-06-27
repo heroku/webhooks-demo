@@ -17,35 +17,24 @@
 
   <body>
     <div class="container pa0 ma0">
-      <div class="header bg-gradient-secondary bb b--black-10 w-100 shadow-outer-1 flex items-center ph3 pv1 ">
-        <div class="f3-ns b white mr4 lh-title">
-          <img src="hooked-logo.svg" class='h2 mr2 v-mid' alt="">Webhooks Viewer</div>
+      <div class="header bg-gradient-secondary bb b--black-10 w-100 shadow-outer-1 flex items-center ph3 h4 items-center">
+        <div class="f3-ns b white mr4 lh-title"><a href="/" class="link white">
+          <img src="hooked-logo.svg" class='h2 mr2 v-mid' alt="">Webhooks Viewer</a></div>
         <div class="spacer flex-auto"></div>
         <ul class="white list pa0 ma0">
           <% if session[:name] %>
-            <li class="link ml3 dib pv3 b"><%= image_tag(@gravatar, class: "v-mid br-100 w3 h3 mr1") %> <%= session[:name] %></li>
-            <!-- <li class="link ml1 pr1 mr1 dib pv3 b w1 br v-mid b--white-30"></li> -->
-            <li class="link ml3 dib pv3 b"><a href="/logout" class="link white">
-              Sign out</a>
-            </li>
+            <li class="link mr3 dib pv3 b"><a href="/logout" class="link white"><%= image_tag(@gravatar, class: "v-mid br-100 w3 h3 mr1") %> <%= session[:name] %></a></li>
+            <li class="link mr2 dib pv3 b"><a href="/logout" class="link white">Logout</a></li>
           <% else %>
-            <li class="link ml3 dib pv3 b"><a href="/login" class="link white">
-              <svg class="h1 w1 gradient-purple mv4">
-                <use xlink:href="#configure-28"></use>
-              </svg>Login</a>
-            </li>
+            <li class="link ml3 dib pv3 b"><a href="/login" class="link white">Login</a></li>
           <% end %>
         </ul>
       </div>
-
-      <div class="w-100 mb3 flex f6 f4-ns bg-light-gray dark-gray" id="tabs">
+      <div class="w-100 mb3 flex f5 f4-ns bg-light-gray dark-gray" id="tabs">
         <a href="/" class="link gray pa3 bb b--light-silver hover-b--gray">Webhook Events</a>
         <a href="/setup" class="link gray pa3 bb b--light-silver hover-b--gray">Setup Instructions</a>
-
-        <div class="flex-auto bb b--light-silver pa3 tr f5 items-center">
-        </div>
+        <div class="flex-auto bb b--light-silver pa3 tr f5 items-center"></div>
       </div>
-
       <%= yield %>
     </div>
   </body>
