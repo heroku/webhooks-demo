@@ -10,6 +10,10 @@ $(document).ready(function(){
     document.title = 'Webhooks Viewer Demo'
   })
 
+  $('#no-events-button').click(function() {
+    document.location = '/setup'
+  })
+
   var render = function(data, hide) {
     var list = $('#events-list')
 

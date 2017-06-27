@@ -2,6 +2,14 @@
   <%= javascript_include_tag 'dashboard', 'data-turbolinks-track': 'reload' %>
 <% end %>
 
+<% if @no_events %>
+  <div class="pv3 ph3 w-100 center">
+    <button type="button" class="pointer outline-transparent tl w-100 tc bg-light-blue hover-bg-blue white b br1 ba b--light-gray pa2" id="no-events-button">
+      <span id="no-events">This app has not received any events yet, have you set up webhooks yet?</span>
+    </button>
+  </div>
+<% end %>
+
 <div class="flex-auto pa3 tc-ns f5 items-center">
   <div class="flex-ns items-center lh-copy">
     <div class="dib mb2 mb0-ns">First <a href="/setup">add some webhooks</a> to send events to this app.  Then new events will appear as they are received.</div>
