@@ -12,3 +12,36 @@
   position: absolute;
   left: 15px;
 }
+
+.shadow-1 {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+}
+
+/*
+   MALIBU
+   Styles for exclusive use with the malibu icon system
+*/
+
+.gradient-dark-gray {
+  fill: url('#gradient-dark-gray');
+}
+
+.gradient-purple {
+  fill: url('#gradient-purple');
+}
+
+.gradient-red {
+  fill: url('#gradient-red');
+}
+
+.gradient-orange {
+  fill: url('#gradient-orange');
+}
+
+.gradient-green {
+  fill: url('#gradient-green');
+}
+
+.gradient-blue {
+  fill: url('#gradient-blue');
+}

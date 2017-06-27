@@ -1,7 +1,11 @@
-<div class="ph3 mt4">
-  <div class="dt w-100 w-80-l mw9 center">
+<div class="ph3 mv6 pv3">
+  <div class="dt w-100 w-80-l mw8 center">
+    <section class="mb5 pb5 bb b--silver">
+      <div class="f1 mb4">Getting Started</div>
+      <div class="f5 f4-ns lh-copy dark-gray">Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Aenean lacinia bibendum nulla sed consectetur. Cras justo odio.</div>
+    </section>
     <section class="mb5">
-      <div class="f2 mb4 lh-title">Setting up the webhooks CLI plugin</div>
+      <div class="f3 mb4 lh-title">Setting up the webhooks CLI plugin</div>
       <div class="code-block relative lh-copy mv3 w-100 bg-light-gray code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
         <div>heroku plugins:install heroku-webhooks</div>
       </div>
@@ -16,7 +20,7 @@
     </section>
 
     <section class="mb5">
-      <div class="f2 mb4 lh-title">Create an app $TRIGGER_APP that we will be triggering events on</div>
+      <div class="f3 mb4 lh-title">Create an app $TRIGGER_APP that we will be triggering events on</div>
       <div class="code-block relative lh-copy mv3 w-100 bg-light-gray code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
         <div>heroku create -n</div>
       </div>
@@ -32,7 +36,7 @@
     </section>
 
     <section class="mb5">
-      <div class="f2 mb4 lh-title">Add a release webhook for $TRIGGER_APP</div>
+      <div class="f3 mb4 lh-title">Add a release webhook for $TRIGGER_APP</div>
       <div class="code-block relative lh-copy mv3 w-100 bg-light-gray code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
         <div>heroku webhooks:add --include api:release -l sync --url <%= @webhooks %> -s <%= @webhook_secret %> -a $TRIGGER_APP</div>
       </div>
@@ -47,7 +51,7 @@
     </section>
 
     <section class="mb5">
-      <div class="f2 mb4 lh-title">Trigger a release by setting a config var</div>
+      <div class="f3 mb4 lh-title">Trigger a release by setting a config var</div>
       <div class="code-block relative lh-copy mv3 w-100 bg-light-gray code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
         <div>heroku config:set FOO=bar -a $TRIGGER_APP</div>
       </div>
@@ -60,10 +64,6 @@
         <div>Setting FOO and restarting ⬢ $TRIGGER_APP... done, v3</div>
         <div>FOO: bar</div>
       </div>
-    </section>
-
-    <section class="mb5">
-      <div class="f2 mb4 lh-title">Open the <a href="/">webhooks viewer dashboard</a> to view the release event</div>
     </section>
   </div>
 </div>

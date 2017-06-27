@@ -22,7 +22,7 @@ $(document).ready(function(){
       newListRow.addClass('events-list-row dt-row-ns hover-bg-lightest-silver bb b--light-gray pv3 pv0-ns')
 
       var publishedAt = $('<div>')
-      publishedAt.addClass('mw4-l db dtc-ns pv1 pr4 pv3-ns f4 lh-copy')
+      publishedAt.addClass('mw4-l db dtc-ns pv1 pr4 pv3-ns f4 f5-ns lh-copy')
       publishedAt.text(data.created_at)
       newListRow.append(publishedAt)
 

@@ -3,16 +3,34 @@
 <% end %>
 
 <% if @no_events %>
-  <div class="pv3 ph3 w-100 center">
-    <button type="button" class="pointer outline-transparent tl w-100 tc bg-light-blue hover-bg-blue white b br1 ba b--light-gray pa2" id="no-events-button">
-      <span id="no-events">This app has not received any events yet, have you set up webhooks yet?</span>
-    </button>
+<div class="pa3">
+
+  <div class="w-100 mw7 center tc br1 pa4 mv3 bb b--light-gray">
+    <img src="welcome_image.svg" alt="" class="w-80 mt3 mb6">
+
+    <div class="f3 f2-ns mb4 purple lh-title">Getting started with Webhooks Viewer</div>
+    <div class="f5 f4-ns lh-copy dark-gray ph5 mv2">
+      This application has not received any webhook events as of yet, we assume its because you've not yet setup your webhooks.
+     </div>
+     <div>
+       <a href="/setup" class="dib f5 ttu br1 bg-blue white mv3 pv2 ph3 link b w-100 w-33-ns">Setup Webhooks</a>
+     </div>
   </div>
+  <div class="w-100 mw7 center tc br1 pa4 mv3 dark-gray">For additional details view dev center documentation on <a href="#">Webhooks Viewer</a></div>
+</div>
+
 <% end %>
 
-<div class="flex-auto pa3 tc-ns f5 items-center">
-  <div class="flex-ns items-center lh-copy">
-    <div class="dib mb2 mb0-ns">First <a href="/setup">add some webhooks</a> to send events to this app.  Then new events will appear as they are received.</div>
+<div class="pv3 ph3 w-100 center">
+  <button type="button" class="pointer outline-transparent tl w-100 tc mb3 bg-light-blue hover-bg-blue white b br1 ba b--light-gray pa2" id="loading-future-button" style="display: none">
+    <span id="loading-future-done"></span>
+  </button>
+</div>
+
+<% unless @no_events %>
+<div class="db ph3 ph6-l mt5 f5 items-center">
+  <div class="items-center lh-copy">
+    <div class="dib mb2 mb0-ns dark-gray">Events will appear as they are received.</div>
     <div class="hk-button__spinner ml2" id="loading-future" style="visibility: hidden">
       <i class="hk-button__spinner__dot hk-button__spinner__dot--one"></i>
       <i class="hk-button__spinner__dot hk-button__spinner__dot--two"></i>
@@ -21,19 +39,14 @@
   </div>
 </div>
 
-<div class="pv3 ph3 w-100 center">
-  <button type="button" class="pointer outline-transparent tl w-100 tc mb3 bg-light-blue hover-bg-blue white b br1 ba b--light-gray pa2" id="loading-future-button" style="display: none">
-    <span id="loading-future-done"></span>
-  </button>
-</div>
-
-<div class="flex-auto flex flex-row bg-white flex ph3">
-  <div class="events-list dt w-100 center" id="events-list">
-    <div class="dt-row-ns" id="events-list-header">
-      <div class="dn dtc-ns pv3 pr3 b bb b--light-gray dark-gray f5">Received At</div>
-      <div class="dn dtc-ns pv3 pr3 b bb b--light-gray dark-gray f5">Resource</div>
-      <div class="dn dtc-ns pv3 pr3 b bb b--light-gray dark-gray f5">Action</div>
-      <div class="dn dtc-ns pv3 pr3 b bb b--light-gray dark-gray f5">Payload</div>
+  <div class="flex-auto flex flex-row bg-white flex ph3 ph6-l">
+    <div class="events-list dt w-100 center" id="events-list">
+      <div class="dt-row-ns" id="events-list-header">
+        <div class="dn dtc-ns pv3 pr3 b bb b--light-gray dark-gray f5">Received At</div>
+        <div class="dn dtc-ns pv3 pr3 b bb b--light-gray dark-gray f5">Resource</div>
+        <div class="dn dtc-ns pv3 pr3 b bb b--light-gray dark-gray f5">Action</div>
+        <div class="dn dtc-ns pv3 pr3 b bb b--light-gray dark-gray f5">Payload</div>
+      </div>
     </div>
   </div>
-</div>
+<% end %>

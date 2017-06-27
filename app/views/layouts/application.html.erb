@@ -16,33 +16,25 @@
   </head>
 
   <body>
-    <div class="container flex flex-column">
-      <div class="header pv2 ph3 bg-gradient-secondary bb b--black-10 w-100 shadow-outer-1 flex items-center">
-        <div class="f3-ns b white mr4 flex-auto">
-          <svg width="19px" height="27px" class="v-mid mr1" viewBox="0 0 19 27" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-              <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                  <g id="Group" transform="translate(0.000000, -3.000000)" fill-rule="nonzero" fill="#ffffff">
-                      <path d="M9.41330046,17.9763534 C13.5723017,17.9763534 16.9438383,14.6048167 16.9438383,10.4458155 C16.9438383,6.28681435 13.5723017,2.91527773 9.41330046,2.91527773 C6.80414878,2.91527773 4.42277454,4.25385211 3.05095469,6.41569494 C2.71670116,6.9424431 2.8727489,7.64042288 3.39949706,7.9746764 C3.92624522,8.30892993 4.624225,8.15288219 4.95847853,7.62613403 C5.92011828,6.1106916 7.5857468,5.17443907 9.41330046,5.17443907 C12.3246013,5.17443907 14.6846769,7.53451471 14.6846769,10.4458155 C14.6846769,13.3571164 12.3246013,15.717192 9.41330046,15.717192 C8.78945028,15.717192 8.28371979,16.2229225 8.28371979,16.8467727 C8.28371979,17.4706229 8.78945028,17.9763534 9.41330046,17.9763534 Z" id="Oval-2" transform="translate(9.909415, 10.445816) rotate(-63.000000) translate(-9.909415, -10.445816) "></path>
-                      <path d="M9.64497041,15.2071006 C7.35740044,15.2071006 5.50295858,13.3526587 5.50295858,11.0650888 C5.50295858,8.77751879 7.35740044,6.92307692 9.64497041,6.92307692 C11.9325404,6.92307692 13.7869822,8.77751879 13.7869822,11.0650888 C13.7869822,13.3526587 11.9325404,15.2071006 9.64497041,15.2071006 Z M9.64497041,13.1988524 C10.8234156,13.1988524 11.7787341,12.2435339 11.7787341,11.0650888 C11.7787341,9.88664362 10.8234156,8.93132509 9.64497041,8.93132509 C8.46652528,8.93132509 7.51120674,9.88664362 7.51120674,11.0650888 C7.51120674,12.2435339 8.46652528,13.1988524 9.64497041,13.1988524 Z" id="Oval"></path>
-                      <path d="M16.4924374,27.9949824 L2.79750346,27.9949824 L2.79750346,21.7452426 L5.72155078,24.0098095 C6.16244689,24.3512673 6.79988056,24.2747545 7.14529873,23.8389135 C7.49071689,23.4030724 7.41331672,22.7729473 6.97242061,22.4314895 L3.22858766,19.5320289 C2.96085425,19.3246792 2.63055023,19.2120057 2.29043529,19.2120057 C1.45029723,19.2120057 0.769230769,19.8852634 0.769230769,20.7157689 L0.769230769,28.4962368 C0.769230769,29.3267423 1.45029723,30 2.29043529,30 L16.9995055,30 C17.8396436,30 18.5207101,29.3267423 18.5207101,28.4962368 L18.5207101,19.2106143 C18.5207101,18.3801088 17.8396436,17.7068511 16.9995055,17.7068511 L10.6570652,17.7068511 L10.6570652,14.4344615 C10.6570652,13.8807911 10.2030209,13.4319527 9.64292882,13.4319527 C9.08283679,13.4319527 8.62879248,13.8807911 8.62879248,14.4344615 L8.62879248,18.2081055 C8.62879248,19.038611 9.30985894,19.7118687 10.149997,19.7118687 L16.4924374,19.7118687 L16.4924374,27.9949824 Z" id="Path-2"></path>
-                  </g>
-              </g>
-          </svg>
-          Webhooks Viewer</div>
+    <div class="container pa0 ma0">
+      <div class="header bg-gradient-secondary bb b--black-10 w-100 shadow-outer-1 flex items-center ph3 pv1 ">
+        <div class="f3-ns b white mr4 lh-title">
+          <img src="hooked-logo.svg" class='h2 mr2 v-mid' alt="">Webhooks Viewer</div>
+        <div class="spacer flex-auto"></div>
         <ul class="white list pa0 ma0">
           <% if session[:email] %>
-            <li class="link ml3 dib v-mid b"><a href="/logout" class="link white">Logout</a></li>
+            <li class="link ml3 dib pv3 b"><a href="/logout" class="link white">Logout</a></li>
             <%= session[:email] %>
           <% else %>
-            <li class="link ml3 dib v-mid b"><a href="/login" class="link white">Login</a></li>
+            <li class="link ml3 dib pv3 b"><a href="/login" class="link white">Login</a></li>
           <% end %>
-          <li class="link ml3 dib v-mid">
-            <%= image_tag(@gravatar, class: "br-100 w3 h3") %>
-          </li>
+          <% if session[:email] %>
+            <li class="link ml3 dib v-mid"><%= image_tag(@gravatar, class: "br-100 w3 h3") %></li>
+          <% end %>
         </ul>
       </div>
 
-      <div class="w-100 mb3 flex f4 dark-gray" id="tabs">
+      <div class="w-100 mb3 flex f4 bg-light-gray dark-gray" id="tabs">
         <a href="/" class="link gray pa3 bb b--light-silver hover-b--gray">Webhook Events</a>
         <a href="/setup" class="link gray pa3 bb b--light-silver hover-b--gray">Setup Instructions</a>
 

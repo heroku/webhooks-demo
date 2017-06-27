@@ -5,3 +5,8 @@
 
 this.App = {};
 App.cable = ActionCable.createConsumer();
+
+// Malibu
+$('<div>').load('https://www.herokucdn.com/malibu/latest/sprite.svg', function() {
+    $("body").append($(this).html());
+});
