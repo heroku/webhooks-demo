@@ -22,13 +22,13 @@
           <img src="hooked-logo.svg" class='h2 mr2 v-mid' alt="">Webhooks Viewer</div>
         <div class="spacer flex-auto"></div>
         <ul class="white list pa0 ma0">
-          <% if session[:email] %>
+          <% if session[:name] %>
             <li class="link ml3 dib pv3 b"><a href="/logout" class="link white">Logout</a></li>
-            <%= session[:email] %>
+            <%= session[:name] %>
           <% else %>
             <li class="link ml3 dib pv3 b"><a href="/login" class="link white">Login</a></li>
           <% end %>
-          <% if session[:email] %>
+          <% if session[:name] %>
             <li class="link ml3 dib v-mid"><%= image_tag(@gravatar, class: "br-100 w3 h3") %></li>
           <% end %>
         </ul>
