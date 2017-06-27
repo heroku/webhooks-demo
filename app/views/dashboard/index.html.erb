@@ -2,9 +2,13 @@
   <%= javascript_include_tag 'dashboard', 'data-turbolinks-track': 'reload' %>
 <% end %>
 
-<% if @no_events %>
-<div class="pa3">
+<div class="pv3 ph3 w-100 center">
+  <button type="button" class="pointer outline-transparent tl w-100 tc mb3 bg-light-blue hover-bg-blue white b br1 ba b--light-gray pa2" id="loading-future-button" style="display: none">
+    <span id="loading-future-done"></span>
+  </button>
+</div>
 
+<%= content_tag(:div, style: ('display:none' unless @no_events), id: 'getting-started', class: ['pa3']) do %>
   <div class="w-100 mw7 center tc br1 pa4 mv3 bb b--light-gray">
     <img src="welcome_image.svg" alt="" class="w-80 mt3 mb6">
 
@@ -17,17 +21,9 @@
      </div>
   </div>
   <div class="w-100 mw7 center tc br1 pa4 mv3 dark-gray">For additional details view dev center documentation on <a href="#">Webhooks Viewer</a></div>
-</div>
-
 <% end %>
 
-<div class="pv3 ph3 w-100 center">
-  <button type="button" class="pointer outline-transparent tl w-100 tc mb3 bg-light-blue hover-bg-blue white b br1 ba b--light-gray pa2" id="loading-future-button" style="display: none">
-    <span id="loading-future-done"></span>
-  </button>
-</div>
-
-<% unless @no_events %>
+<%= content_tag(:div, style: ('display:none' if @no_events), id: 'events-table') do %>
 <div class="db ph3 ph6-l mt5 f5 items-center">
   <div class="items-center lh-copy">
     <div class="dib mb2 mb0-ns dark-gray">Events will appear as they are received.</div>

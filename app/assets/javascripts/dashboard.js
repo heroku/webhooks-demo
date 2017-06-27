@@ -2,6 +2,8 @@ $(document).ready(function(){
   var numEvents = 0
 
   $('#loading-future-button').click(function() {
+    $('#getting-started').slideUp()
+    $('#events-table').slideDown()
     $('.events-list-row:hidden').slideDown()
     $('#loading-future-button').slideUp()
 
