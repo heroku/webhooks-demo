@@ -23,13 +23,17 @@
         <div class="spacer flex-auto"></div>
         <ul class="white list pa0 ma0">
           <% if session[:name] %>
-            <li class="link ml3 dib pv3 b"><a href="/logout" class="link white">Logout</a></li>
-            <%= session[:name] %>
+            <li class="link ml3 dib pv3 b"><%= image_tag(@gravatar, class: "v-mid br-100 w3 h3 mr1") %> <%= session[:name] %></li>
+            <!-- <li class="link ml1 pr1 mr1 dib pv3 b w1 br v-mid b--white-30"></li> -->
+            <li class="link ml3 dib pv3 b"><a href="/logout" class="link white">
+              Sign out</a>
+            </li>
           <% else %>
-            <li class="link ml3 dib pv3 b"><a href="/login" class="link white">Login</a></li>
-          <% end %>
-          <% if session[:name] %>
-            <li class="link ml3 dib v-mid"><%= image_tag(@gravatar, class: "br-100 w3 h3") %></li>
+            <li class="link ml3 dib pv3 b"><a href="/login" class="link white">
+              <svg class="h1 w1 gradient-purple mv4">
+                <use xlink:href="#configure-28"></use>
+              </svg>Login</a>
+            </li>
           <% end %>
         </ul>
       </div>
