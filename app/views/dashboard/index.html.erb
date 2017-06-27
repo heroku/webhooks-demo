@@ -2,12 +2,6 @@
   <%= javascript_include_tag 'dashboard', 'data-turbolinks-track': 'reload' %>
 <% end %>
 
-<div class="pv3 ph3 w-100 center">
-  <button type="button" class="pointer outline-transparent tl w-100 tc mb3 bg-light-blue hover-bg-blue white b br1 ba b--light-gray pa2" id="loading-future-button" style="display: none">
-    <span id="loading-future-done"></span>
-  </button>
-</div>
-
 <%= content_tag(:div, style: ('display:none' unless @no_events), id: 'getting-started', class: ['pa3']) do %>
   <div class="w-100 mw7 center tc br1 pa4 mv3 bb b--light-gray">
     <img src="welcome_image.svg" alt="" class="w-80 mt3 mb6">
@@ -20,28 +14,32 @@
        <a href="/setup" class="dib f5 ttu br1 bg-blue white mv3 pv2 ph3 link b w-100 w-33-ns">Setup Webhooks</a>
      </div>
   </div>
-  <div class="w-100 mw7 center tc br1 pa4 mv3 dark-gray">For additional details view dev center documentation on <a href="#">Webhooks Viewer</a></div>
+  <div class="w-100 mw7 lh-copy center tc br1 pa4 mv3 dark-gray">For additional details view dev center documentation on <a href="#">Webhooks Viewer</a></div>
 <% end %>
 
 <%= content_tag(:div, style: ('display:none' if @no_events), id: 'events-table') do %>
-<div class="db ph3 ph6-l mt5 f5 items-center">
-  <div class="items-center lh-copy">
-    <div class="dib mb2 mb0-ns dark-gray">Events will appear as they are received.</div>
+<div class="db ph3 ph6-l mv5 f5 items-center">
+  <div class="items-center lh-copy flex h3">
+    <div class="dib dark-gray">Events will appear as they are received.</div>
     <div class="hk-button__spinner ml2" id="loading-future" style="visibility: hidden">
       <i class="hk-button__spinner__dot hk-button__spinner__dot--one"></i>
       <i class="hk-button__spinner__dot hk-button__spinner__dot--two"></i>
       <i class="hk-button__spinner__dot hk-button__spinner__dot--three"></i>
     </div>
+    <div class="flex-auto"></div>
+    <button type="button" class="pulse-1 dib-ns pointer outline-transparent tc bg-blue hover-bg-light-blue white b br1 ba b--light-gray pv1 ph5" id="loading-future-button" style="display: none">
+      <span id="loading-future-done"></span>
+    </button>
   </div>
 </div>
 
   <div class="flex-auto flex flex-row bg-white flex ph3 ph6-l">
     <div class="events-list dt w-100 center" id="events-list">
       <div class="dt-row-ns" id="events-list-header">
-        <div class="dn dtc-ns pv3 pr3 b bb b--light-gray dark-gray f5">Received At</div>
-        <div class="dn dtc-ns pv3 pr3 b bb b--light-gray dark-gray f5">Resource</div>
-        <div class="dn dtc-ns pv3 pr3 b bb b--light-gray dark-gray f5">Action</div>
-        <div class="dn dtc-ns pv3 pr3 b bb b--light-gray dark-gray f5">Payload</div>
+        <div class="dn dtc-ns pv3 pr3 b bb b--light-gray gray ttu f6">Received At</div>
+        <div class="dn dtc-ns pv3 pr3 b bb b--light-gray gray ttu f6">Resource</div>
+        <div class="dn dtc-ns pv3 pr3 b bb b--light-gray gray ttu f6">Action</div>
+        <div class="dn dtc-ns pv3 pr3 b bb b--light-gray gray ttu f6">Payload</div>
       </div>
     </div>
   </div>
