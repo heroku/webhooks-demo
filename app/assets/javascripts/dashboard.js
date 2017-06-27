@@ -3,6 +3,7 @@ $(document).ready(function(){
 
   $('#loading-future-button').click(function() {
     $('#getting-started').slideUp()
+    $('#events-spinner').slideDown()
     $('#events-table').slideDown()
     $('.events-list-row:hidden').slideDown()
     $('#loading-future-button').slideUp()

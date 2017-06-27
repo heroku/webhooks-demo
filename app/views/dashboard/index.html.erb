@@ -2,7 +2,24 @@
   <%= javascript_include_tag 'dashboard', 'data-turbolinks-track': 'reload' %>
 <% end %>
 
-<%= content_tag(:div, style: ('display:none' unless @no_events), id: 'getting-started', class: ['pa3']) do %>
+<div class="db ph3 ph6-l f5 items-center">
+  <div class="items-center lh-copy flex h3">
+    <%= content_tag(:div, style: ('display:none' if @no_events), id: 'events-spinner') do %>
+    <div class="dib dark-gray">Events will appear as they are received.</div>
+    <div class="hk-button__spinner ml2" id="loading-future" style="visibility: hidden">
+      <i class="hk-button__spinner__dot hk-button__spinner__dot--one"></i>
+      <i class="hk-button__spinner__dot hk-button__spinner__dot--two"></i>
+      <i class="hk-button__spinner__dot hk-button__spinner__dot--three"></i>
+    </div>
+    <% end %>
+    <div class="flex-auto"></div>
+    <button type="button" class="pulse-1 dib-ns pointer outline-transparent tc bg-blue hover-bg-light-blue white b br1 ba b--light-gray pv1 ph5 ph6-l ba b--black-20" id="loading-future-button" style="display: none">
+      <span id="loading-future-done"></span>
+    </button>
+  </div>
+</div>
+
+<%= content_tag(:div, style: ('display:none' unless @no_events), id: 'getting-started') do %>
   <div class="w-100 mw7 center tc br1 pa4 mv3 bb b--light-gray">
     <img src="welcome_image.svg" alt="" class="w-80 mt3 mb6">
 
@@ -18,21 +35,6 @@
 <% end %>
 
 <%= content_tag(:div, style: ('display:none' if @no_events), id: 'events-table') do %>
-<div class="db ph3 ph6-l mv5 f5 items-center">
-  <div class="items-center lh-copy flex h3">
-    <div class="dib dark-gray">Events will appear as they are received.</div>
-    <div class="hk-button__spinner ml2" id="loading-future" style="visibility: hidden">
-      <i class="hk-button__spinner__dot hk-button__spinner__dot--one"></i>
-      <i class="hk-button__spinner__dot hk-button__spinner__dot--two"></i>
-      <i class="hk-button__spinner__dot hk-button__spinner__dot--three"></i>
-    </div>
-    <div class="flex-auto"></div>
-    <button type="button" class="pulse-1 dib-ns pointer outline-transparent tc bg-blue hover-bg-light-blue white b br1 ba b--light-gray pv1 ph5 ph6-l ba b--black-20" id="loading-future-button" style="display: none">
-      <span id="loading-future-done"></span>
-    </button>
-  </div>
-</div>
-
   <div class="flex-auto flex flex-row bg-white flex ph3 ph6-l">
     <div class="events-list dt w-100 center" id="events-list">
       <div class="dt-row-ns" id="events-list-header">
