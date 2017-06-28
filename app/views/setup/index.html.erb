@@ -38,6 +38,9 @@
     <section class="mb5">
       <div class="f3 mb2 lh-title">3. Add a release webhook for $TRIGGER_APP</div>
       <div class="dark-gray mv2">Replace $TRIGGER_APP with the name of the app that you created in the last step.</div>
+      <% if Rails.env.development? %>
+        <div class="dark-gray mv2">Replace $PUBLIC_HOST with the publicly addressable host of your development server
+      <% end %>
       <div class="code-block relative lh-copy mv3 w-100 bg-light-gray code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
         <div>heroku webhooks:add --include api:release -l sync --url <%= @webhooks %> -s <%= @webhook_secret %> -a $TRIGGER_APP</div>
       </div>
