@@ -1,8 +1,12 @@
 <div class="ph3 mv6 pv3">
   <div class="dt w-100 w-80-l mw8 center">
-    <section class="mb5 pb5 bb b--light-gray">
-      <div class="f1 mb4">Getting Started</div>
-      <div class="f5 f4-ns lh-copy dark-gray">Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Aenean lacinia bibendum nulla sed consectetur. Cras justo odio.</div>
+    <section class="mb5 pb2 bb b--light-gray">
+      <div class="f1 mb4 lh-title">Getting Started</div>
+      <p class="lh-copy f4 dark-gray">
+        Now you'll create a webhook using the Heroku CLI.
+        The webhook will notify you whenever an app of your choice, which we'll call the &quot;Trigger App&quot;, is deployed.
+        You can pick one of your existing apps for this step or create a new one using our instructions.
+      </p>
     </section>
     <section class="mb5">
       <div class="f3 mb4 lh-title">1. Setting up the webhooks CLI plugin</div>
@@ -37,9 +41,14 @@
 
     <section class="mb5">
       <div class="f3 mb2 lh-title">3. Add a release webhook for $TRIGGER_APP</div>
-      <div class="dark-gray mv2">Replace $TRIGGER_APP with the name of the app that you created in the last step.</div>
+      <p class="f4 dark-gray">
+        Replace $TRIGGER_APP with the name of the app that you created in the last step.
+        Alternatively, you may choose to use one of your existing Heroku apps as the trigger app.
+      </p>
       <% if Rails.env.development? %>
-        <div class="dark-gray mv2">Replace $PUBLIC_HOST with the publicly addressable host of your development server
+        <p class="f4 dark-gray">
+          Replace $PUBLIC_HOST with the publicly addressable host of your development server
+        </p>
       <% end %>
       <div class="code-block relative lh-copy mv3 w-100 bg-light-gray code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
         <div>heroku webhooks:add --include api:release -l sync --url <%= @webhooks %> -s <%= @webhook_secret %> -a $TRIGGER_APP</div>
@@ -68,6 +77,10 @@
         <div>Setting FOO and restarting ⬢ $TRIGGER_APP... done, v3</div>
         <div>FOO: bar</div>
       </div>
+    </section>
+
+    <section class="mb5">
+      <div class="f3 mb4 lh-title">5. You should now see the webhook arrive in the Webhook Events tab. <a href="/" class="link purple">Go check it out!</a></div>
     </section>
 
     <section class="mt6 bt b--light-gray">
