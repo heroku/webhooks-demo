@@ -2,12 +2,15 @@ $(document).ready(function(){
   var numEvents = 0
 
   $('#loading-future-button').click(function() {
+    $('#getting-started').slideUp()
+    $('#events-spinner').slideDown()
+    $('#events-table').slideDown()
     $('.events-list-row:hidden').slideDown()
     $('#loading-future-button').slideUp()
 
     numEvents = 0
 
-    document.title = 'Webhooks Consumer Demo'
+    document.title = 'Webhooks Viewer Demo'
   })
 
   var render = function(data, hide) {
@@ -18,7 +21,7 @@ $(document).ready(function(){
       newListRow.addClass('events-list-row dt-row-ns hover-bg-lightest-silver bb b--light-gray pv3 pv0-ns')
 
       var publishedAt = $('<div>')
-      publishedAt.addClass('mw4-l db dtc-ns pv1 pr4 pv3-ns f4 lh-copy')
+      publishedAt.addClass('mw4-l db dtc-ns pv1 pr4 pv3-ns f4 f5-ns lh-copy')
       publishedAt.text(data.created_at)
       newListRow.append(publishedAt)
 
@@ -57,7 +60,7 @@ $(document).ready(function(){
         numEvents++
 
         $('#loading-future-done').text(numEvents + ' New Event' + (numEvents > 1 ? 's' : ''))
-        document.title = '(' + numEvents + ') Webhooks Consumer Demo'
+        document.title = '(' + numEvents + ') Webhooks Viewer Demo'
 
         $('#loading-future-button').slideDown()
         render(data, true)

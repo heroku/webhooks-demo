@@ -17,8 +17,9 @@ class SessionsController < ApplicationController
     # secret_key_base is set in secret.yml so this is encrypted
     session[:token] = request.env['omniauth.auth']['credentials']['token']
     session[:email] = request.env['omniauth.auth']['info']['email']
+    session[:name] = request.env['omniauth.auth']['info']['name']
 
-    redirect_to "/dashboard"
+    redirect_to root_path
   end
 
   def logout
