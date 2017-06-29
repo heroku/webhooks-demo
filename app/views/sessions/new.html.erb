@@ -1,14 +1,24 @@
 <div class="ph3 mv6 pv3">
   <div class="dt w-100 w-80-l mw8 center">
-    <section class="mb5 pb5 bb b--light-gray">
-      <div class="f1 mb4 lh-title">Introduction</div>
+    <section class="mb5 pb2 bb b--light-gray">
+      <div class="f1 mb4 lh-title">Welcome</div>
       <p class="lh-copy f4 dark-gray">
-        In order to secure the events that your target app emits this app verifies that the currently logged in user has access to this app using Heroku authentication.
-        Configuring authentication is a simple two step process and after successfully following these instructions, you should no longer see this page.
+        This tutorial will walk you through creating a webhook that will notify you when a particular app is deployed.
+        The goal of the tutorial is for you to be able to create a simple working webhook as quickly as possible, while learning the basic concepts along the way.
+        The tutorial has three steps.
+      </p>
+      <div class="f1 mb4 lh-title">Set up Webhooks Viewer</div>
+      <p class="lh-copy f4 dark-gray">
+        In order to secure the events shown here, this app needs to verify who you are.
+        Follow the simple two step process below to configure authentication.
+        After successfully following these instructions, you should no longer see this page.
       </p>
     </section>
     <section class="mb4">
-      <div class="f3 mb4 lh-title">1. Create an OAuth Client</div>
+      <div class="f3 lh-title">1. Create an OAuth Client</div>
+      <p class="f4 dark-gray">
+        Type the following command in your terminal.
+      </p>
       <div class="code-block relative lh-copy mv3 w-100 bg-light-gray code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
         <div>heroku clients:create <%= @oauth_name %> <%= @oauth_url %></div>
       </div>
@@ -22,7 +32,10 @@
       </div>
     </section>
     <section class="mb4">
-      <div class="f3 mb4 lh-title">2. Add OAuth Client to Consumer App</div>
+      <div class="f3 lh-title">2. Add OAuth Client to Consumer App</div>
+      <p class="f4 dark-gray">
+        Replace HEROKU_OAUTH_ID and HEROKU_OAUTH_SECRET with the creds you received running the last command.
+      </p>
       <% if Rails.env.development? %>
         <div class="code-block relative lh-copy mv3 w-100 bg-light-gray code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
           <div>echo "HEROKU_OAUTH_ID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" >> .env</div>
@@ -54,7 +67,7 @@
       <section class="mb4">
         <div class="f3 mb4 lh-title">Log Into the App</div>
         <div class="f4 lh-copy dark-gray">
-          You have now configured oAuth authorization for this app.  Go to the <a href="/" class="link purple">webhooks events</a> page to log in.
+          You have now configured oAuth authorization for this app.  Click <a href="/" class="link purple">here</a> to log in.
         </div>
       </section>
         <% end %>
