@@ -6,8 +6,8 @@
 
 Deploy this button and then click on the `View` link and follow the OAuth Configuration Instructions to log in.
 
-![View](public/manage.png)
+![View](https://github.com/heroku/webhooks-demo/raw/master/public/manage.png)
 
 ## Follow setup instructions to create webhooks
 
-![Setup](public/setup.png)
+![Setup](https://github.com/heroku/webhooks-demo/raw/master/public/setup.png)
