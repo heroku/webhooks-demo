@@ -1,5 +1,6 @@
 {
-  "repository": "https://github.com/heroku/webhooks-consumer-demo",
+  "name": "Heroku Webhooks Demo",
+  "repository": "https://github.com/heroku/webhooks-demo",
   "addons": ["heroku-postgresql:hobby-dev"],
   "env": {
     "WEBHOOK_SECRET": {
