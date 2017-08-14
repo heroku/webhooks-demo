@@ -14,6 +14,7 @@ gem 'jquery-rails'
 gem 'active_model_serializers', '~> 0.10.6'
 gem 'omniauth-heroku'
 gem 'platform-api'
+gem 'tzinfo-data'
 
 group :development, :test do
   gem 'dotenv-rails'
@@ -25,8 +26,5 @@ group :development, :test do
   gem "launchy"
   gem "database_cleaner"
 end
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 ruby "2.4.1"
