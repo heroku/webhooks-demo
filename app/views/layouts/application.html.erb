@@ -3,37 +3,47 @@
   <head>
     <title>Webhooks Viewer Demo</title>
     <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <link rel="stylesheet" href="https://www.herokucdn.com/purple3/latest/purple3.min.css">
-
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://www.herokucdn.com/purple3/3.6.0/purple3.min.css">
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
     <%= action_cable_meta_tag %>
-
     <%= javascript_include_tag 'tabs', 'data-turbolinks-track': 'reload' %>
     <%= yield :head %>
   </head>
 
   <body>
     <div class="container pa0 ma0">
-      <div class="header bg-gradient-secondary bb b--black-10 w-100 shadow-outer-1 flex items-center ph3 h4 items-center">
-        <div class="f3-ns b white mr4 lh-title"><a href="/" class="link white">
-          <img src="hooked-logo.svg" class='h2 mr2 v-mid' alt="">Webhooks Viewer</a></div>
+      <div class="header bg-gradient-secondary bb b--black-10 w-100 shadow-outer-1 flex items-center ph3 h4 flex items-center">
+        <div>
+          <a href="/" class="mr2 link white f3 flex items-center">
+            <img src="webhooks-48.svg" class='h3 w3 mr2' alt="">
+            <div class="dib">Webhooks Viewer</div>
+          </a>
+        </div>
         <div class="spacer flex-auto"></div>
-        <ul class="white list pa0 ma0">
+        <ul class="f4 white list pa0 ma0">
           <% if session[:name] %>
-            <li class="link mr3 dib pv3 b"><a href="/logout" class="link white"><%= image_tag(@gravatar, class: "v-mid br-100 w3 h3 mr1") %> <%= session[:name] %></a></li>
-            <li class="link mr2 dib pv3 b"><a href="/logout" class="link white">Logout</a></li>
-          <% else %>
-            <li class="link ml3 dib pv3 b"><a href="/login" class="link white">Login</a></li>
+          <li class="link white js-dropdown dropdown relative"><%= image_tag(@gravatar, class: "v-mid br-100 w3 h3 mr1") %>
+            <div class="dropdown-content z-999 blue absolute bg-white br1 shadow-outer-2">
+              <div class="dib w-100 tc pa4">
+                <%= image_tag(@gravatar, class: "br-100 h4 w4 mv2 mr2") %>
+                <div class="f4 black pv1"><%= session[:name] %></div>
+                <div class="f5 dark-gray mv1"><%= session[:email] %></div>
+              </div>
+              <div class="tc bt b--light-silver flex flex-column pa3 items-center">
+                <%= button_to "Sign out of Heroku", logout_path, class: "w-100 hk-button-sm--secondary", method: "get", form_class: "w-100" %>
+              </div>
+            </div>
+          </li>
           <% end %>
         </ul>
       </div>
-      <div class="w-100 mb3 flex f5 f4-ns bg-light-gray dark-gray" id="tabs">
-        <a href="/" class="link gray pa3 bb b--light-silver hover-b--gray">Webhook Events</a>
-        <a href="/setup" class="link gray pa3 bb b--light-silver hover-b--gray">Setup Instructions</a>
-        <div class="flex-auto bb b--light-silver pa3 tr f5 items-center"></div>
+      <div class="bg-lightest-silver">
+        <div class="hk-tabs w-100" id="tabs">
+          <a href="/" class="hk-tabs__tab">Webhook Events</a>
+          <a href="/setup" class="hk-tabs__tab">Setup Instructions</a>
+          <div class="spacer flex-auto bb b--silver"></div>
+        </div>
       </div>
       <%= yield %>
     </div>

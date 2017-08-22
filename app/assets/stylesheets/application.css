@@ -62,3 +62,23 @@
     opacity: 1;
   }
 }
+
+.dropdown-content {
+  position: absolute;
+  visibility: hidden;
+  top: 10px;
+  right: 0;
+  max-height: calc(100vH - 64px);
+  width: 240px;
+  opacity: 0;
+  overflow: auto;
+  transform: translateY(-4px);
+  transition: transform ease 0.1s, opacity ease 0.1s;
+}
+
+.dropdown-is-open .dropdown-content {
+  visibility: visible;
+  top: 15px;
+  opacity: 1;
+  transform: translateY(0px);
+}
