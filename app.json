@@ -1,6 +1,6 @@
 {
   "name": "Heroku Webhooks Demo",
-  "logo": "https://avatars3.githubusercontent.com/u/23211?size=120",
+  "logo": "https://raw.githubusercontent.com/heroku/webhooks-demo/master/app/assets/images/heroku_webhooks.png",
   "repository": "https://github.com/heroku/webhooks-demo",
   "addons": ["heroku-postgresql:hobby-dev"],
   "env": {
