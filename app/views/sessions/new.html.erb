@@ -19,7 +19,7 @@
       <p class="f4 dark-gray">
         Type the following command in your terminal.
       </p>
-      <div class="code-block relative lh-copy mv3 w-100 bg-light-gray code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
+      <div class="code-block relative lh-copy mv3 w-100 bg-light-silver  code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
         <div>heroku clients:create <%= @oauth_name %> <%= @oauth_url %></div>
       </div>
     </section>
@@ -33,25 +33,25 @@
     </section>
     <section class="mb4">
       <div class="f3 lh-title">2. Add OAuth Client to Consumer App</div>
-      <p class="f4 dark-gray">
+      <p class="f4 dark-gray lh-copy">
         Replace HEROKU_OAUTH_ID and HEROKU_OAUTH_SECRET with the creds you received running the last command.
       </p>
       <% if Rails.env.development? %>
-        <div class="code-block relative lh-copy mv3 w-100 bg-light-gray code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
+        <div class="code-block relative lh-copy mv3 w-100 bg-light-silver  code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
           <div>echo "HEROKU_OAUTH_ID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" >> .env</div>
         </div>
-        <div class="code-block relative lh-copy mv3 w-100 bg-light-gray code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
+        <div class="code-block relative lh-copy mv3 w-100 bg-light-silver  code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
           <div>echo "HEROKU_OAUTH_SECRET=YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY" >> .env</div>
         </div>
-        <div class="code-block relative lh-copy mv3 w-100 bg-light-gray code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
+        <div class="code-block relative lh-copy mv3 w-100 bg-light-silver  code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
           <div>echo "AUTHORIZATION_APP=app-to-check-authorization-against" >> .env</div>
         </div>
-        <div class="code-block relative lh-copy mv3 w-100 bg-light-gray code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
+        <div class="code-block relative lh-copy mv3 w-100 bg-light-silver  code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
           <div>dotenv rails s</div>
         </div>
       </section>
       <% else %>
-        <div class="code-block relative lh-copy mv3 w-100 bg-light-gray code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
+        <div class="code-block relative lh-copy mv3 w-100 bg-light-silver  code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
           <div>heroku config:set -a <%= @app %> HEROKU_OAUTH_ID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX HEROKU_OAUTH_SECRET=YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY</div>
         </div>
       </section>
@@ -67,8 +67,9 @@
       <section class="mb4">
         <div class="f3 mb4 lh-title">Log Into the App</div>
         <div class="f4 lh-copy dark-gray">
-          You have now configured oAuth authorization for this app.  Click <a href="/" class="link purple">here</a> to log in.
+          You have now configured oAuth authorization for this app.
         </div>
+        <%= button_to "Login Now", root_path, class: "hk-button--primary mv4", method: "get", form_class: "w-100" %>
       </section>
         <% end %>
   </div>

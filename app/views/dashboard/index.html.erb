@@ -2,15 +2,13 @@
   <%= javascript_include_tag 'dashboard', 'data-turbolinks-track': 'reload' %>
 <% end %>
 
-<div class="db ph3 ph6-l f5 items-center">
-  <div class="items-center lh-copy flex h4">
+<div class="db ph3 ph6-l items-center">
+  <div class="items-center lh-copy flex mt3">
     <%= content_tag(:div, style: ('display:none' if @no_events), id: 'events-spinner') do %>
-    <div class="dib dark-gray">Receiving events</div>
-    <div class="hk-button__spinner ml2" id="loading-future" style="visibility: hidden">
-      <i class="hk-button__spinner__dot hk-button__spinner__dot--one"></i>
-      <i class="hk-button__spinner__dot hk-button__spinner__dot--two"></i>
-      <i class="hk-button__spinner__dot hk-button__spinner__dot--three"></i>
-    </div>
+      <div class="dib dark-gray pv4 f4">Receiving events</div>
+      <svg class="nudge-up--1 fill-purple h2 w2 v-mid mh2" id="loading-future" style="visibility: hidden">
+        <use xlink:href="#loading-28" />
+      </svg>
     <% end %>
     <div class="flex-auto"></div>
     <button type="button" class="pulse-1 dib-ns pointer outline-transparent tc bg-blue hover-bg-light-blue white b br1 ba b--light-gray pv1 ph5 ph6-l ba b--black-20" id="loading-future-button" style="display: none">
@@ -27,10 +25,8 @@
     <div class="f5 f4-ns lh-copy dark-gray ph5 mv2">
       This application has not received any webhook events as of yet, we assume its because you've not yet setup your webhooks.
      </div>
-     <div>
-       <a href="/setup" class="dib f5 ttu br1 bg-blue white mv3 pv2 ph3 link b w-100 w-33-ns">Setup Webhooks</a>
-     </div>
-  </div>
+     <%= button_to "Setup Webhooks", setup_index_path, class: "hk-button--primary bg-gradient-blue mv3", method: "get", form_class: "w-100" %>
+    </div>
   <div class="w-100 mw7 lh-copy center tc br1 pa4 mv3 dark-gray">For additional details view dev center documentation on <a href="https://devcenter.heroku.com/articles/app-webhooks-tutorial" target="_blank" class="link purple">Webhooks Viewer</a></div>
 <% end %>
 
