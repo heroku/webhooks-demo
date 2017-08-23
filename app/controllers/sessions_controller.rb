@@ -24,6 +24,6 @@ class SessionsController < ApplicationController
 
   def logout
     session.clear
-    redirect_to "https://dashboard.heroku.com/logout"
+    redirect_to "https://id.heroku.com/logout"
   end
 end
