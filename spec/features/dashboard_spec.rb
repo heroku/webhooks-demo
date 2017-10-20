@@ -4,21 +4,26 @@ RSpec.describe "Dashboard", type: :feature do
   it 'loads events from /events and actioncable' do
     login_capybara
 
-    db_uuid = 'c6a7e2ff-643c-490f-83dd-6333f1e47a49'
-    Event.create(payload: {id: db_uuid})
+    now = Time.now
+
+    payload_1 = {'id' => SecureRandom.uuid}
+    Event.create(payload: payload_1, created_at: now)
+
+    payload_2 = {'id' => SecureRandom.uuid}
+    Event.create(payload: payload_2, created_at: now - 1)
 
     visit '/'
 
     # wait for events from db to load and actioncable to connect
     expect(page).to have_selector('#loading-future', visible: true)
 
-    cable_uuid = 'b0bddf33-9cd1-4556-9c29-9cdd9aa3125c'
-    ActionCable.server.broadcast('events', {'payload' => {'id' => cable_uuid}})
+    cable_payload = {'id' => SecureRandom.uuid}
+    ActionCable.server.broadcast('events', {'payload' => cable_payload})
 
     expect(page).to have_selector('#loading-future-done', visible: true)
     find(:css, '#loading-future-button').click
 
-    expect(page).to have_content(db_uuid)
-    expect(page).to have_content(cable_uuid)
+    rendered_payloads = page.all('.events-payload').map{|payload| JSON.parse(payload.text)}
+    expect(rendered_payloads).to eq([cable_payload, payload_1, payload_2])
   end
 end
