@@ -41,12 +41,12 @@ RSpec.describe "Events", type: :request do
     expect(response).to have_http_status(:ok)
     expect(response.parsed_body).to eq([
       {
-        'payload' => {'foo' => 'bar'},
-        'created_at' => '2001-02-03T00:00:00.000Z'
-      },
-      {
         'payload' => {'biz' => 'baz'},
         'created_at' => '2001-02-04T00:00:00.000Z'
+      },
+      {
+        'payload' => {'foo' => 'bar'},
+        'created_at' => '2001-02-03T00:00:00.000Z'
       }
     ])
   end

@@ -51,7 +51,7 @@ $(document).ready(function(){
   }
 
   $.ajax({url: "/events", dataType: 'json'}).done(function(events) {
-    events.forEach(function(data) {
+    events.reverse().forEach(function(data) {
       render(data, false)
     })
 
