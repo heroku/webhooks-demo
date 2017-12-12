@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :events, only: [:index]
   resources :setup, only: [:index]
 
+  get "/ci" => "setup#ci"
+
   root to: "dashboard#index"
 
   get "login" => "sessions#new"
