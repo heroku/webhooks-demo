@@ -1,6 +1,5 @@
 class SetupController < ApplicationController
-
-  def index
+  before_action do
     @webhook_secret = ENV['WEBHOOK_SECRET']
     if Rails.env.development?
       @webhooks = 'https://$PUBLIC_HOST'+ webhooks_path

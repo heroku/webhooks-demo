@@ -1,0 +1,67 @@
+<div class="ph3 mv6 pv3">
+  <div class="dt w-100 w-80-l mw8 center">
+    <section class="mb5 pb2 bb b--light-gray">
+      <div class="f1 mb4 lh-title">Getting Started</div>
+      <p class="lh-copy f4 dark-gray">
+        Now you'll create a webhook using the Heroku CLI.
+        The webhook will notify you whenever a pipeline of your choice, which we'll call the &quot;Trigger Pipeline&quot;, has test run changes.
+        You should pick one of your existing pipelines with tests enabled for this demo.
+      </p>
+    </section>
+    <section class="mb5">
+      <div class="f3 mb4 lh-title">1. Update the Heroku CLI</div>
+      <p class="f4 dark-gray lh-copy">
+        Commands for managing CI webhooks are available in version heroku-cli/6.14.38 and later of the Heroku CLI.
+        To ensure that you are using the latest version of the CLI, run the following command:
+      </p>
+      <div class="code-block relative lh-copy mv3 w-100 bg-light-silver  code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
+        <div>heroku update</div>
+      </div>
+    </section>
+
+    <div class="f5 mv4 b dark-gray">Your output should look something like this:</div>
+
+    <section class="mb5 br1">
+      <div class="lh-copy w-100 bg-black code pa2 pl4 white word-wrap br1">
+        <div>heroku-cli: Updating to 6.14.38-9bfc11a... 12.7 MB/12.7 MB</div>
+        <div>heroku-cli: Updating CLI... already on latest version: 6.14.38-9bfc11a</div>
+        <div>heroku-cli: Updating plugins... done</div>
+      </div>
+    </section>
+
+    <section class="mb5">
+      <div class="f3 mb2 lh-title">2. Add a test run webhook for $TRIGGER_PIPELINE</div>
+      <p class="f4 dark-gray lh-copy">
+        Replace $TRIGGER_PIPELINE with the name or id of the pipeline on which you have tests enabled.
+      </p>
+      <% if Rails.env.development? %>
+        <p class="f4 dark-gray">
+          Replace $PUBLIC_HOST with the publicly addressable host of your development server
+        </p>
+      <% end %>
+      <div class="code-block relative lh-copy mv3 w-100 bg-light-silver  code pa2 pl5 dark-gray ba b--silver br1 word-wrap">
+        <div>heroku webhooks:add --include api:test-run -l sync --url <%= @webhooks %> -s <%= @webhook_secret %> -p $TRIGGER_PIPELINE</div>
+      </div>
+    </section>
+
+    <div class="f5 mv4 b dark-gray">Your output should look something like this:</div>
+
+    <section class="mb5 br1">
+      <div class="lh-copy w-100 bg-black code pa2 pl4 white word-wrap br1">
+        <div>Adding webhook to $TRIGGER_PIPELINE... done</div>
+      </div>
+    </section>
+
+    <section class="mb5">
+      <div class="f3 mb4 lh-title">3. Trigger a test run by either pushing a commit or "Run Again" through the dashboard</div>
+    </section>
+
+    <section class="mb5">
+      <div class="f3 mb4 lh-title">4. You should now see the webhook arrive in the Webhook Events tab. <a href="/" class="link purple">Go check it out!</a></div>
+    </section>
+
+    <section class="mt6 bt b--light-gray">
+      <div class="f4 w-100 mw7 lh-copy center tc br1 pa4 mv3 dark-gray">For additional details view dev center documentation on <a href="https://devcenter.heroku.com/articles/heroku-ci-webhooks-tutorial?preview=1" target="_blank" class="purple">Webhooks Viewer</a></div>
+    </section>
+  </div>
+</div>
