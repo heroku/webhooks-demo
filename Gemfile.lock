@@ -180,7 +180,7 @@ GEM
       rspec-mocks (~> 3.6.0)
       rspec-support (~> 3.6.0)
     rspec-support (3.6.0)
-    rubyzip (1.2.1)
+    rubyzip (1.2.2)
     selenium-webdriver (3.5.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
