@@ -133,7 +133,7 @@ GEM
       heroics (~> 0.0.23)
       moneta (~> 0.8.1)
     public_suffix (2.0.5)
-    puma (3.9.1)
+    puma (3.12.2)
     rack (2.0.7)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -219,7 +219,7 @@ DEPENDENCIES
   omniauth-heroku
   pg (~> 0.18)
   platform-api
-  puma (~> 3.7)
+  puma (~> 3.12)
   rails (~> 5.1.6.1)
   rspec-rails
   selenium-webdriver
