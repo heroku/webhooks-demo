@@ -74,7 +74,7 @@ GEM
       railties (>= 3.2, < 5.2)
     erubi (1.8.0)
     erubis (2.7.0)
-    excon (0.58.0)
+    excon (0.71.0)
     execjs (2.7.0)
     faraday (0.12.2)
       multipart-post (>= 1.2, < 3)
