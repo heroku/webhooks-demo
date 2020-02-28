@@ -133,7 +133,7 @@ GEM
       heroics (~> 0.0.23)
       moneta (~> 0.8.1)
     public_suffix (2.0.5)
-    puma (3.12.2)
+    puma (3.12.3)
     rack (2.0.8)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
