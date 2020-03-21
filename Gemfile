@@ -5,21 +5,21 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails', '~> 5.1.6.1'
+gem 'rails', '~> 5.2.4.2'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.12'
 gem 'multi_json'
 gem 'uglifier'
-gem 'jquery-rails'
+gem 'jquery-rails', '>= 4.3.3'
 gem 'active_model_serializers', '~> 0.10.6'
 gem 'omniauth-heroku'
 gem 'platform-api'
 gem 'tzinfo-data'
 
 group :development, :test do
-  gem 'dotenv-rails'
+  gem 'dotenv-rails', '>= 2.2.2'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem "rspec-rails"
+  gem "rspec-rails", ">= 3.6.1"
   gem "capybara"
   gem "selenium-webdriver"
   gem "chromedriver-helper"
