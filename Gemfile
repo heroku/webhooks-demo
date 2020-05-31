@@ -7,7 +7,7 @@ end
 
 gem 'rails', '~> 5.2.4.3'
 gem 'pg', '~> 0.18'
-gem 'puma', '~> 3.12'
+gem 'puma', '~> 3.12', '>= 3.12.6'
 gem 'multi_json'
 gem 'uglifier'
 gem 'jquery-rails', '>= 4.3.5'
