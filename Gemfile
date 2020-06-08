@@ -20,11 +20,12 @@ group :development, :test do
   gem 'dotenv-rails', '>= 2.7.5'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem "rspec-rails", ">= 3.9.1"
+  gem "rspec_junit_formatter"
   gem "capybara"
   gem "selenium-webdriver"
-  gem "chromedriver-helper"
+  gem "webdrivers"
   gem "launchy"
   gem "database_cleaner"
 end
 
-ruby "2.4.1"
+ruby "2.6.6"

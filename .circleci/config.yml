@@ -1,0 +1,90 @@
+---
+version: 2.1
+jobs:
+  build:
+    working_directory: ~/webhooks-demo
+    docker:
+      # specify the version you desire here
+      - image: circleci/ruby:2.6.6-node-browsers
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+        environment:
+          POSTGRES_HOST: localhost
+          POSTGRES_USER: webhooks-demo
+          POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      - image: circleci/postgres:11
+        environment:
+          POSTGRES_USER: webhooks-demo
+          POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+    steps:
+      - checkout
+      - run: sudo apt-get update
+      - run: sudo apt-get install -y chromium-driver google-chrome-stable
+
+      # Update to Bundler 2 https://discuss.circleci.com/t/using-bundler-2-0-during-ci-fails/27411
+      - run:
+          name: install dependencies
+          command: |
+            gem update --system
+            gem install bundler
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run: dockerize -wait tcp://localhost:5432 -timeout 1m
+
+      - run: &install-dependencies
+          name: install dependencies
+          command: |
+            bin/setup
+
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+
+      # run tests!
+      - run: &run-tests
+          name: run tests
+          command: |
+            mkdir --parents /tmp/test-results
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | \
+              circleci tests split --split-by=timings)"
+
+            bundle exec rspec \
+              --format progress \
+              --format RspecJunitFormatter \
+              --out /tmp/test-results/rspec.xml \
+              --format progress \
+              $TEST_FILES
+      - run:
+          name: Checkout merge commit
+          command: |
+            set -ex
+            if [[ -n "${CIRCLE_PULL_REQUEST}" ]]
+            then
+              git pull --ff-only origin "refs/pull/${CIRCLE_PULL_REQUEST//*pull\//}/merge"
+            fi
+      - run: *install-dependencies
+      - run:
+          <<: *run-tests
+          name: run tests after merge
+
+      # collect reports
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results
+
+workflows:
+  version: 2
+  workflow:
+    jobs:
+      - build
