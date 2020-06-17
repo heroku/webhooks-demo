@@ -10,18 +10,18 @@ gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.12', '>= 3.12.6'
 gem 'multi_json'
 gem 'uglifier'
-gem 'jquery-rails', '>= 4.3.5'
+gem 'jquery-rails', '>= 4.4.0'
 gem 'active_model_serializers', '~> 0.10.10'
-gem 'omniauth-heroku'
+gem 'omniauth-heroku', '>= 0.3.0'
 gem 'platform-api'
 gem 'tzinfo-data'
 
 group :development, :test do
   gem 'dotenv-rails', '>= 2.7.5'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem "rspec-rails", ">= 3.9.1"
+  gem "rspec-rails", ">= 4.0.1"
   gem "rspec_junit_formatter"
-  gem "capybara"
+  gem "capybara", ">= 2.15.1"
   gem "selenium-webdriver"
   gem "webdrivers"
   gem "launchy"
