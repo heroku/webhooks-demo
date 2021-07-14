@@ -132,6 +132,9 @@ GEM
     omniauth-oauth2 (1.4.0)
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
+    omniauth-rails_csrf_protection (0.1.2)
+      actionpack (>= 4.2)
+      omniauth (>= 1.3.1)
     pg (0.21.0)
     platform-api (2.1.0)
       heroics (~> 0.0.23)
@@ -229,6 +232,7 @@ DEPENDENCIES
   launchy
   multi_json
   omniauth-heroku
+  omniauth-rails_csrf_protection
   pg (~> 0.18)
   platform-api
   puma (~> 4.3)
