@@ -13,6 +13,7 @@ gem 'uglifier'
 gem 'jquery-rails', '>= 4.3.5'
 gem 'active_model_serializers', '~> 0.10.10'
 gem 'omniauth-heroku'
+gem 'omniauth-rails_csrf_protection'
 gem 'platform-api'
 gem 'tzinfo-data'
 
