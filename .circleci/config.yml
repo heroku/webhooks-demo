@@ -5,7 +5,7 @@ jobs:
     working_directory: ~/webhooks-demo
     docker:
       # specify the version you desire here
-      - image: cimg/ruby:2.7.5-node-browsers
+      - image: cimg/ruby:2.7.5-browsers
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
@@ -13,7 +13,7 @@ jobs:
           POSTGRES_HOST: localhost
           POSTGRES_USER: webhooks-demo
           POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      - image: circleci/postgres:11
+      - image: cimg/postgres:11.15
         environment:
           POSTGRES_USER: webhooks-demo
           POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
