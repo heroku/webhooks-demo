@@ -1,27 +1,34 @@
 ---
 version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@1.2.5
 jobs:
   build:
     working_directory: ~/webhooks-demo
     docker:
       # specify the version you desire here
-      - image: circleci/ruby:2.6.8-node-browsers
+      - image: cimg/ruby:2.7.5-browsers
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # documented at https://circleci.com/developer/images/image/cimg/ruby
         environment:
           POSTGRES_HOST: localhost
           POSTGRES_USER: webhooks-demo
           POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      - image: circleci/postgres:11
+      - image: cimg/postgres:11.15
         environment:
           POSTGRES_USER: webhooks-demo
           POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
 
     steps:
       - checkout
-      - run: sudo apt-get update
-      - run: sudo apt-get install -y chromium-driver google-chrome-stable
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
+      - run:
+          command: |
+            google-chrome --version
+            chromedriver --version
+          name: Check browser install
 
       # Update to Bundler 2 https://discuss.circleci.com/t/using-bundler-2-0-during-ci-fails/27411
       - run:
