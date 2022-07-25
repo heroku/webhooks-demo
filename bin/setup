@@ -17,6 +17,16 @@ FileUtils.chdir APP_ROOT do
   system! "gem install bundler --conservative"
   system("bundle check") || system!("bundle install")
 
+  puts "\n== Copying sample files =="
+  unless File.exist?('.env')
+    FileUtils.cp '.env.sample', '.env'
+
+    require 'securerandom'
+    File.open('.env', 'a') do |f|
+      f.puts "SECRET_KEY_BASE=#{SecureRandom.hex(64)}"
+      f.puts "WEBHOOK_SECRET=#{SecureRandom.hex(64)}"
+    end
+  end
   # puts "\n== Copying sample files =="
   # unless File.exist?("config/database.yml")
   #   FileUtils.cp "config/database.yml.sample", "config/database.yml"

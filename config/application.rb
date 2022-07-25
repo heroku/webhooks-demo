@@ -23,5 +23,14 @@ module WebhooksConsumerDemo
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore
+
+    # Omniauth:
+    config.middleware.use OmniAuth::Builder do
+      provider :heroku, ENV['HEROKU_OAUTH_ID'], ENV['HEROKU_OAUTH_SECRET'],
+      scope: 'read identity',
+      fetch_info: true
+    end
   end
 end
