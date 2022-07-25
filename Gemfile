@@ -29,4 +29,4 @@ group :development, :test do
   gem "database_cleaner"
 end
 
-ruby "2.7.5"
+ruby "3.1.2"
