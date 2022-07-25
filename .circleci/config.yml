@@ -7,7 +7,7 @@ jobs:
     working_directory: ~/webhooks-demo
     docker:
       # specify the version you desire here
-      - image: cimg/ruby:2.7.5-browsers
+      - image: cimg/ruby:3.1.2-browsers
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/developer/images/image/cimg/ruby
