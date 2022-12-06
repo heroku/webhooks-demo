@@ -1,0 +1,41 @@
+name: Webhooks Demo
+on:
+  push:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      PGHOST: localhost
+      RAILS_ENV: test
+    services:
+      postgres:
+        image: postgres:11
+        env:
+          POSTGRES_USER: webhooks-demo
+          POSTGRES_HOST_AUTH_METHOD: trust
+          POSTGRES_DB: webhooks-consumer-demo-test
+        ports:
+          - 5432:5432
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    name: Setup env & run tests
+    steps:
+
+    - name: Checkout repo
+      uses: actions/checkout@v3
+
+    - uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true
+
+    - name: Setup
+      run: bin/setup
+
+    - name: Run Rspec test
+      run: bundle exec rspec --format doc
+
