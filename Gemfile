@@ -5,24 +5,24 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails', '~> 7.0.3.1'
+gem 'rails', '~> 7.0.4.3'
 gem 'sprockets-rails'
 
 gem 'pg', '~> 1.4.1'
 gem 'puma', '~> 5.6.4'
 gem 'multi_json'
 gem 'uglifier'
-gem 'jquery-rails', '>= 4.3.5'
-gem 'active_model_serializers', '~> 0.10.10'
+gem 'jquery-rails', '>= 4.5.0'
+gem 'active_model_serializers', '~> 0.10.13'
 gem 'omniauth-heroku'
 gem 'omniauth-rails_csrf_protection'
 gem 'platform-api'
 gem 'tzinfo-data'
 
 group :development, :test do
-  gem 'dotenv-rails', '>= 2.7.5'
+  gem 'dotenv-rails', '>= 2.7.6'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem "rspec-rails", ">= 3.9.1"
+  gem "rspec-rails", ">= 5.1.2"
   gem "rspec_junit_formatter"
   gem "capybara"
   gem "selenium-webdriver"
