@@ -156,7 +156,7 @@ GEM
       digest
       net-protocol
       timeout
-    nio4r (2.5.8)
+    nio4r (2.5.9)
     nokogiri (1.13.10)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
@@ -186,7 +186,7 @@ GEM
       moneta (~> 1.0.0)
       rate_throttle_client (~> 0.1.0)
     public_suffix (4.0.7)
-    puma (5.6.4)
+    puma (5.6.7)
       nio4r (~> 2.0)
     racc (1.6.1)
     rack (2.2.4)
@@ -298,7 +298,7 @@ DEPENDENCIES
   omniauth-rails_csrf_protection
   pg (~> 1.4.1)
   platform-api
-  puma (~> 5.6.4)
+  puma (~> 5.6.7)
   rails (~> 7.0.3.1)
   rspec-rails (>= 3.9.1)
   rspec_junit_formatter
