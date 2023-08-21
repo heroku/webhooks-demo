@@ -9,7 +9,7 @@ gem 'rails', '~> 7.0.3.1'
 gem 'sprockets-rails'
 
 gem 'pg', '~> 1.4.1'
-gem 'puma', '~> 5.6.4'
+gem 'puma', '~> 5.6.7'
 gem 'multi_json'
 gem 'uglifier'
 gem 'jquery-rails', '>= 4.3.5'
