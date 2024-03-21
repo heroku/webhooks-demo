@@ -7,6 +7,7 @@ test:
   adapter: async
 
 production:
-  adapter: postgresql
+  adapter: sqlite3
+  database: webhooks-sqlite
   url: <%= ENV.fetch("DATABASE_URL") {} %>
   channel_prefix: webhooks-consumer-demo_production
