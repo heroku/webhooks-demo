@@ -1,6 +1,9 @@
 development:
-  adapter: postgresql
-  database: webhooks-consumer-demo-development
+#  adapter: postgresql
+#  database: webhooks-consumer-demo-development
+  adapter: sqlite3
+  database: webhooks-sqlite
+  url: <%= ENV.fetch("DATABASE_URL") {} %>
   channel_prefix: webhooks-consumer-demo_development
 
 test:
