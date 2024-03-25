@@ -23,11 +23,11 @@ module AuthenticatingController
     session = cookies.encrypted[:_session_id]
     if session && session['token'] && session['email']
       heroku_api = PlatformAPI.connect_oauth(session['token'])
-      puts 'heroku api client' heroku_api
-      puts 'heroku app' heroku_app
-      puts 'app info without suffix' heroku_api.app.info('webhooks-demo-marcel-4')
+      puts "heroku api client #{heroku_api}"
+      puts "heroku app #{heroku_app}"
+      puts "app info without suffix #{heroku_api.app.info('webhooks-demo-marcel-4')}"
       heroku_api.app.info(heroku_app)
-      puts 'app info with suffix' heroku_api.app.info(heroku_app)
+      puts "app info with suffix #{heroku_api.app.info(heroku_app)}"
 
 
       session['email']
