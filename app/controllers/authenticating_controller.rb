@@ -20,6 +20,9 @@ module AuthenticatingController
   end
 
   def authenticate_user!
+    puts "Authorization header.xx #{request.authorization}"
+    puts "request.env.xx #{request.env["Authorization"]}"
+    puts "request.session.xx #{request.session["Authorization"]}"
     puts "cookies..xx #{cookies}"
     session = cookies.encrypted[:_session_id]
     puts "session..xx #{session}"
