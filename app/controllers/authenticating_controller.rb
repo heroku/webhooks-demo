@@ -24,7 +24,7 @@ module AuthenticatingController
     puts "Authorization header.xx #{}"
     if auth_header
       token = auth_header.match(/Bearer (.*)$/)[1]
-      PlatformAPI.connect_oauth(token)
+      heroku_api = PlatformAPI.connect_oauth(token)
       heroku_api.app.info("webhooks-demo-marcel-4")
     elsif session && session['token'] && session['email']
       puts "cookies..xx #{cookies}"
