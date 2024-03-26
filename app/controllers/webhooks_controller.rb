@@ -6,7 +6,7 @@ class WebhooksController < ActionController::API
 
       #serialized_event = ActiveModelSerializers::SerializableResource.new(event, {serializer: EventSerializer})
       #ActionCable.server.broadcast 'events', serialized_event
-      EventList.class.events.append(params['webhook'])
+      EventList.events.append(params['webhook'])
 
       # TODO ensure transaction around request?
       # TODO: trim events list?
