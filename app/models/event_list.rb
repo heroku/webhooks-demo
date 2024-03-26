@@ -1,0 +1,3 @@
+class EventList
+  @@events=[]
+end
