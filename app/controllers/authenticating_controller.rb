@@ -20,7 +20,9 @@ module AuthenticatingController
   end
 
   def authenticate_user!
+    puts "cookies..xx #{cookies}"
     session = cookies.encrypted[:_session_id]
+    puts "session..xx #{session}"
     if session && session['token'] && session['email']
       heroku_api = PlatformAPI.connect_oauth(session['token'])
       puts "heroku api client #{heroku_api}"
