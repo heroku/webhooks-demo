@@ -9,7 +9,7 @@ module AuthenticatingController
       end
       dev_app
     else
-      match = request.host.match(/(.*)\.herokuapp\.com$/)
+      match = request.host.match(/(.*)\-.+\.herokuapp\.com$/)
 
       unless match
         raise 'Could not determine heroku app from host'
@@ -25,7 +25,7 @@ module AuthenticatingController
     if auth_header
       token = auth_header.match(/Bearer (.*)$/)[1]
       heroku_api = PlatformAPI.connect_oauth(token)
-      heroku_api.app.info("webhooks-demo-marcel-4")
+      heroku_api.app.info(heroku_app)
     elsif session && session['token'] && session['email']
       puts "cookies..xx #{cookies}"
       session = cookies.encrypted[:_session_id]
