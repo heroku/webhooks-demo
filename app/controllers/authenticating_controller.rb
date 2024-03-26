@@ -20,13 +20,16 @@ module AuthenticatingController
   end
 
   def authenticate_user!
-    puts "Authorization header.xx #{request.authorization}"
-    puts "request.env.xx #{request.env["Authorization"]}"
-    puts "request.session.xx #{request.session["Authorization"]}"
-    puts "cookies..xx #{cookies}"
-    session = cookies.encrypted[:_session_id]
-    puts "session..xx #{session}"
-    if session && session['token'] && session['email']
+    auth_header = request.authorization
+    puts "Authorization header.xx #{}"
+    if auth_header
+      token = auth_header.match(/Bearer (.*)$/)[1]
+      PlatformAPI.connect_oauth(token)
+      heroku_api.app.info("webhooks-demo-marcel-4")
+    elsif session && session['token'] && session['email']
+      puts "cookies..xx #{cookies}"
+      session = cookies.encrypted[:_session_id]
+      puts "session..xx #{session}"
       heroku_api = PlatformAPI.connect_oauth(session['token'])
       puts "heroku api client #{heroku_api}"
       puts "heroku app #{heroku_app}"
