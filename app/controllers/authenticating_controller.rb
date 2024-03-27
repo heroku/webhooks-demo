@@ -19,13 +19,34 @@ module AuthenticatingController
     end
   end
 
+  def strip_suffix_from_app_name(app_name)
+    match = app_name.match(/(.*)\-.+/)
+    if not match
+      return app_name
+    end
+    match[1]
+  end
+
+  def get_app_info(heroku_api, app_name)
+      begin
+        heroku_api.app.info(app_name)
+      rescue Excon::Error::NotFound
+        app_name = strip_suffix_from_app_name(app_name)
+        heroku_api.app.info(app_name)
+      end
+  end
+
   def authenticate_user!
-    session = cookies.encrypted[:_session_id]
-    if session && session['token'] && session['email']
+    auth_header = request.authorization
+    app_name = heroku_app
+    if auth_header
+      token = auth_header.match(/Bearer (.*)$/)[1]
+      heroku_api = PlatformAPI.connect_oauth(token)
+      get_app_info(heroku_api, app_name)
+    elsif session && session['token'] && session['email']
+      session = cookies.encrypted[:_session_id]
       heroku_api = PlatformAPI.connect_oauth(session['token'])
-
-      heroku_api.app.info(heroku_app)
-
+      get_app_info(heroku_api, app_name)
       session['email']
     end
   end
