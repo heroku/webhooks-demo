@@ -19,6 +19,10 @@ module AuthenticatingController
     end
   end
 
+  # heroku adds a -xxxx suffix to the app name when creating the web_url for an app
+  # this method strips out that suffix to use the correct app name when querying the api
+  # as an example https://my-great-app-f47016ef1d19.herokuapp.com/ would be parsed to
+  # my-great-app-f47016ef1d19 in the heroku_app method and my-great-app here
   def strip_suffix_from_app_name(app_name)
     match = app_name.match(/(.*)\-.+/)
     if not match
@@ -39,6 +43,8 @@ module AuthenticatingController
   def authenticate_user!
     auth_header = request.authorization
     app_name = heroku_app
+    # try first to authenticate the request from Bearer token authorization header and
+    # if that doesn't work try the previous session_id from the cookies
     if auth_header
       token = auth_header.match(/Bearer (.*)$/)[1]
       heroku_api = PlatformAPI.connect_oauth(token)
