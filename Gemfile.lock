@@ -259,6 +259,8 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
+    sqlite3 (1.7.3)
+      mini_portile2 (~> 2.8.0)
     strscan (3.0.4)
     thor (1.2.1)
     timeout (0.3.0)
@@ -304,6 +306,7 @@ DEPENDENCIES
   rspec_junit_formatter
   selenium-webdriver
   sprockets-rails
+  sqlite3
   tzinfo-data
   uglifier
   webdrivers
