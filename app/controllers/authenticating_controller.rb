@@ -9,7 +9,7 @@ module AuthenticatingController
       end
       dev_app
     else
-      match = request.host.match(/(.*)\.herokuapp\.com$/)
+      match = request.host.match(/(.*)\.(herokuapp|staging\.herokuappdev)\.com$/)
 
       unless match
         raise 'Could not determine heroku app from host'
