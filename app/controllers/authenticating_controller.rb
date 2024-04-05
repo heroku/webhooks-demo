@@ -41,7 +41,7 @@ module AuthenticatingController
   end
 
   def platform_api_client(token, domain)
-    if domain.end_with?("herokuapdev")
+    if domain.end_with?("herokuappdev")
       return PlatformAPI.connect_oauth(token, url: "https://api.staging.herokudev.com")
     end
     PlatformAPI.connect_oauth(token)
