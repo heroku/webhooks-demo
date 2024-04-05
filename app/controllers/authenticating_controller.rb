@@ -14,8 +14,8 @@ module AuthenticatingController
       unless match
         raise 'Could not determine heroku app from host'
       end
-
-      match[1]
+      # match[1] is the app name, [2] would be the high level domain (herokuapp or staging.herokuappdev)
+      return match[1], match[2]
     end
   end
 
@@ -40,18 +40,25 @@ module AuthenticatingController
       end
   end
 
+  def platform_api_client(token, domain)
+    if domain.end_with?("herokuappdev")
+      return PlatformAPI.connect_oauth(token, url: "https://api.staging.herokudev.com")
+    end
+    PlatformAPI.connect_oauth(token)
+  end
+
   def authenticate_user!
     auth_header = request.authorization
-    app_name = heroku_app
+    app_name, domain = heroku_app
     # try first to authenticate the request from Bearer token authorization header and
     # if that doesn't work try the previous session_id from the cookies
     if auth_header
       token = auth_header.match(/Bearer (.*)$/)[1]
-      heroku_api = PlatformAPI.connect_oauth(token)
+      heroku_api = platform_api_client(token, domain)
       get_app_info(heroku_api, app_name)
     elsif session && session['token'] && session['email']
       session = cookies.encrypted[:_session_id]
-      heroku_api = PlatformAPI.connect_oauth(session['token'])
+      heroku_api = platform_api_client(session['token'], domain)
       get_app_info(heroku_api, app_name)
       session['email']
     end
