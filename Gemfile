@@ -25,8 +25,8 @@ group :development, :test do
   gem "rspec-rails", ">= 3.9.1"
   gem "rspec_junit_formatter"
   gem "capybara"
-  gem "selenium-webdriver"
-  gem "webdrivers"
+  gem "selenium-webdriver", ">= 4.4.0"
+  gem "webdrivers", ">= 5.1.0"
   gem "launchy"
   gem "database_cleaner"
 end
